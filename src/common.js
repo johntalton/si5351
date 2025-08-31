@@ -200,168 +200,168 @@ export class Common {
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setInterruptStatusSticky(bus, buffer) {}
+	static async setInterruptStatusSticky(bus, buffer) { await bus.writeI2cBlock(REGISTER.INTERRUPT_STATUS_STICKY, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setInterruptStatusMask(bus, buffer) {}
+	static async setInterruptStatusMask(bus, buffer) { await bus.writeI2cBlock(REGISTER.INTERRUPT_STATUS_MASK, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setOutputEnableControl(bus, buffer) {}
+	static async setOutputEnableControl(bus, buffer) { await bus.writeI2cBlock(REGISTER.OUTPUT_ENABLE_CONTROL, buffer)}
 
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setPinEnabledControl(bus, buffer) {}
+	static async setPinEnabledControl(bus, buffer) { await bus.writeI2cBlock(REGISTER.OEB_PIN_ENABLED_CONTROL, buffer)}
 
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setPLLInputSource(bus, buffer) {}
+	static async setPLLInputSource(bus, buffer) { await bus.writeI2cBlock(REGISTER.PLL_INPUT_SOURCE, buffer)}
 
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockControl0(bus, buffer) {}
+	static async setClockControl0(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK0_CONTROL, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockControl1(bus, buffer) {}
+	static async setClockControl1(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK1_CONTROL, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockControl2(bus, buffer) {}
+	static async setClockControl2(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK2_CONTROL, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockControl3(bus, buffer) {}
+	static async setClockControl3(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK3_CONTROL, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockControl4(bus, buffer) {}
+	static async setClockControl4(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK4_CONTROL, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockControl5(bus, buffer) {}
+	static async setClockControl5(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK5_CONTROL, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockControl6(bus, buffer) {}
+	static async setClockControl6(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK6_CONTROL, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockControl7(bus, buffer) {}
+	static async setClockControl7(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK7_CONTROL, buffer)}
 
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockDisableState3_0(bus, buffer) {}
+	static async setClockDisableState3_0(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK_3_0_DISABLE_STATE, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockDisableState7_4(bus, buffer) {}
+	static async setClockDisableState7_4(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK_7_4_DISABLE_STATE, buffer)}
 
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setMultiSynthParameters0(bus, buffer) {}
+	static async setMultiSynthParameters0(bus, buffer) { await bus.writeI2cBlock(REGISTER.MULTI_SYNTH_0_PARAMETERS, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setMultiSynthParameters1(bus, buffer) {}
+	static async setMultiSynthParameters1(bus, buffer) { await bus.writeI2cBlock(REGISTER.MULTI_SYNTH_1_PARAMETERS, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setMultiSynthParameters2(bus, buffer) {}
+	static async setMultiSynthParameters2(bus, buffer) { await bus.writeI2cBlock(REGISTER.MULTI_SYNTH_2_PARAMETERS, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setMultiSynthParameters3(bus, buffer) {}
+	static async setMultiSynthParameters3(bus, buffer) { await bus.writeI2cBlock(REGISTER.MULTI_SYNTH_3_PARAMETERS, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setMultiSynthParameters4(bus, buffer) {}
+	static async setMultiSynthParameters4(bus, buffer) { await bus.writeI2cBlock(REGISTER.MULTI_SYNTH_4_PARAMETERS, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setMultiSynthParameters5(bus, buffer) {}
+	static async setMultiSynthParameters5(bus, buffer) { await bus.writeI2cBlock(REGISTER.MULTI_SYNTH_5_PARAMETERS, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setMultiSynthParameters6(bus, buffer) {}
+	static async setMultiSynthParameters6(bus, buffer) { await bus.writeI2cBlock(REGISTER.MULTI_SYNTH_6_PARAMETERS, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setMultiSynthParameters7(bus, buffer) {}
+	static async setMultiSynthParameters7(bus, buffer) { await bus.writeI2cBlock(REGISTER.MULTI_SYNTH_7_PARAMETERS, buffer)}
 
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockOutputDivider6_7(bus, buffer) {}
+	static async setClockOutputDivider6_7(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLOCK_6_AND_7_OUTPUT_DIVIDER, buffer)}
 
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockInitialPhaseOffset0(bus, buffer) {}
+	static async setClockInitialPhaseOffset0(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK0_INITIAL_PHASE_OFFSET, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockInitialPhaseOffset1(bus, buffer) {}
+	static async setClockInitialPhaseOffset1(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK1_INITIAL_PHASE_OFFSET, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockInitialPhaseOffset2(bus, buffer) {}
+	static async setClockInitialPhaseOffset2(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK2_INITIAL_PHASE_OFFSET, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockInitialPhaseOffset3(bus, buffer) {}
+	static async setClockInitialPhaseOffset3(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK3_INITIAL_PHASE_OFFSET, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockInitialPhaseOffset4(bus, buffer) {}
+	static async setClockInitialPhaseOffset4(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK4_INITIAL_PHASE_OFFSET, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setClockInitialPhaseOffset5(bus, buffer) {}
+	static async setClockInitialPhaseOffset5(bus, buffer) { await bus.writeI2cBlock(REGISTER.CLK5_INITIAL_PHASE_OFFSET, buffer)}
 
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setPLLReset(bus, buffer) {}
+	static async setPLLReset(bus, buffer) { await bus.writeI2cBlock(REGISTER.PLL_RESET, buffer)}
 	/**
 	 * @param {I2CAddressedBus} bus
 	 * @param {I2CBufferSource} buffer
 	 */
-	static async setCrystalInternalLoadCapacitance(bus, buffer) {}
+	static async setCrystalInternalLoadCapacitance(bus, buffer) { await bus.writeI2cBlock(REGISTER.CRYSTAL_INTERNAL_LOAD_CAPACITANCE, buffer)}
 }

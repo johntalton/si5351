@@ -1,4 +1,89 @@
 
+/**
+ * @typedef {Object} DeviceStatus
+ */
+
+/**
+ * @typedef {Object} InterruptStatusSticky
+ */
+
+/**
+ * @typedef {Object} InterruptStatusMask
+ */
+
+/**
+ * @typedef {Object} OutputEnableControl
+ */
+
+/**
+ * @typedef {Object} PinEnabledControl
+ */
+
+/**
+ * @typedef {Object} PLLInputSource
+ */
+
+/**
+ * @typedef {Object} ClockControl
+ */
+
+/**
+ * @typedef {Object} ClockDisabledState
+ */
+
+/**
+ * @typedef {Object} MultiSynthParameters0
+ */
+
+/**
+ * @typedef {Object} MultiSynthParameters1
+ */
+
+/**
+ * @typedef {Object} MultiSynthParameters2
+ */
+
+/**
+ * @typedef {Object} MultiSynthParameters3
+ */
+
+/**
+ * @typedef {Object} MultiSynthParameters4
+ */
+
+/**
+ * @typedef {Object} MultiSynthParameters5
+ */
+
+/**
+ * @typedef {Object} MultiSynthParameters6
+ */
+
+/**
+ * @typedef {Object} MultiSynthParameters7
+ */
+
+/**
+ * @typedef {Object} ClockOutputDivider
+ */
+
+/**
+ * @typedef {Object} ClockInitialPhaseOffset
+ */
+
+/**
+ * @typedef {Object} PLLReset
+ */
+
+/**
+ * @typedef {Object} CrystalInternalLoadCapacitance
+ */
+
+
+
+
+
+
 export const DEFAULT_ADDRESS = 0x60
 
 export const SINGLE_BYTE = 1

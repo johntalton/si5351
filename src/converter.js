@@ -1,11 +1,33 @@
 /**
  * @import { I2CBufferSource } from '@johntalton/and-other-delights'
+ * @import {
+ * DeviceStatus,
+ * InterruptStatusSticky,
+ * InterruptStatusMask,
+ * OutputEnableControl,
+ * PinEnabledControl,
+ * PLLInputSource,
+ * ClockControl,
+ * ClockDisabledState,
+ * MultiSynthParameters0,
+ * MultiSynthParameters1,
+ * MultiSynthParameters2,
+ * MultiSynthParameters3,
+ * MultiSynthParameters4,
+ * MultiSynthParameters5,
+ * MultiSynthParameters6,
+ * MultiSynthParameters7,
+ * ClockOutputDivider,
+ * ClockInitialPhaseOffset,
+ * PLLReset,
+ * CrystalInternalLoadCapacitance
+ * } from './defs.js'
  */
 
 export class Converter {
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {DeviceStatus}
 	*/
 	static decodeDeviceStatus(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -25,7 +47,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {InterruptStatusSticky}
 	*/
 	static decodeInterruptStatusSticky(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -43,7 +65,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {InterruptStatusSticky} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeInterruptStatusSticky(param) {
@@ -52,7 +74,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {InterruptStatusMask}
 	*/
 	static decodeInterruptStatusMask(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -70,7 +92,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {InterruptStatusMask} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeInterruptStatusMask(param) {
@@ -79,7 +101,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {OutputEnableControl}
 	*/
 	static decodeOutputEnableControl(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -101,7 +123,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {OutputEnableControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeOutputEnableControl(param) {
@@ -110,7 +132,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {PinEnabledControl}
 	*/
 	static decodePinEnabledControl(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -132,7 +154,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {PinEnabledControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodePinEnabledControl(param) {
@@ -141,7 +163,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {PLLInputSource}
 	*/
 	static decodePLLInputSource(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -157,13 +179,17 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {PLLInputSource} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodePLLInputSource(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockControl}
+	 */
 	static #decodeClockControl(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
@@ -183,14 +209,14 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockControl}
 	*/
 	static decodeClockControl0(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockControl0(param) {
@@ -199,14 +225,14 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockControl}
 	*/
 	static decodeClockControl1(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockControl1(param) {
@@ -215,14 +241,14 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockControl}
 	*/
 	static decodeClockControl2(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockControl2(param) {
@@ -231,14 +257,14 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockControl}
 	*/
 	static decodeClockControl3(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockControl3(param) {
@@ -247,14 +273,14 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockControl}
 	*/
 	static decodeClockControl4(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockControl4(param) {
@@ -263,14 +289,14 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockControl}
 	*/
 	static decodeClockControl5(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockControl5(param) {
@@ -279,14 +305,14 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockControl}
 	*/
 	static decodeClockControl6(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockControl6(param) {
@@ -295,14 +321,14 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockControl}
 	*/
 	static decodeClockControl7(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockControl} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockControl7(param) {
@@ -311,7 +337,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockDisabledState}
 	*/
 	static decodeClockDisableState3_0(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -329,7 +355,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockDisabledState} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockDisableState3_0(param) {
@@ -338,7 +364,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {ClockDisabledState}
 	*/
 	static decodeClockDisableState7_4(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -356,7 +382,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockDisabledState} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockDisableState7_4(param) {
@@ -365,7 +391,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {MultiSynthParameters0}
 	*/
 	static decodeMultiSynthParameters0(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -378,7 +404,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {MultiSynthParameters0} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters0(param) {
@@ -387,7 +413,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {MultiSynthParameters1}
 	*/
 	static decodeMultiSynthParameters1(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -400,7 +426,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {MultiSynthParameters1} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters1(param) {
@@ -409,7 +435,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {MultiSynthParameters2}
 	*/
 	static decodeMultiSynthParameters2(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -422,7 +448,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {MultiSynthParameters2} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters2(param) {
@@ -431,7 +457,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {MultiSynthParameters3}
 	*/
 	static decodeMultiSynthParameters3(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -444,7 +470,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {MultiSynthParameters3} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters3(param) {
@@ -453,7 +479,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {MultiSynthParameters4}
 	*/
 	static decodeMultiSynthParameters4(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -466,7 +492,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {MultiSynthParameters4} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters4(param) {
@@ -475,7 +501,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {MultiSynthParameters5}
 	*/
 	static decodeMultiSynthParameters5(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -488,7 +514,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {MultiSynthParameters5} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters5(param) {
@@ -497,7 +523,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {MultiSynthParameters6}
 	*/
 	static decodeMultiSynthParameters6(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -510,7 +536,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {MultiSynthParameters6} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters6(param) {
@@ -519,7 +545,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {XXX}
+	 * @returns {MultiSynthParameters7}
 	*/
 	static decodeMultiSynthParameters7(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -532,13 +558,17 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {MultiSynthParameters7} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters7(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockOutputDivider}
+	 */
 	static decodeClockOutputDivider6_7(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
@@ -553,13 +583,17 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockOutputDivider} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockOutputDivider6_7(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockInitialPhaseOffset}
+	 */
 	static #decodeClockInitialPhaseOffset(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
@@ -572,79 +606,106 @@ export class Converter {
 		}
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockInitialPhaseOffset}
+	 */
 	static decodeClockInitialPhaseOffset0(buffer) {
 		return this.#decodeClockInitialPhaseOffset(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockInitialPhaseOffset0(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockInitialPhaseOffset}
+	 */
 	static decodeClockInitialPhaseOffset1(buffer) {
 		return this.#decodeClockInitialPhaseOffset(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockInitialPhaseOffset1(param) {
 
 	}
 
-
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockInitialPhaseOffset}
+	 */
 	static decodeClockInitialPhaseOffset2(buffer) {
 		return this.#decodeClockInitialPhaseOffset(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockInitialPhaseOffset2(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockInitialPhaseOffset}
+	 */
 	static decodeClockInitialPhaseOffset3(buffer) {
 		return this.#decodeClockInitialPhaseOffset(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockInitialPhaseOffset3(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockInitialPhaseOffset}
+	 */
 	static decodeClockInitialPhaseOffset4(buffer) {
 		return this.#decodeClockInitialPhaseOffset(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockInitialPhaseOffset4(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {ClockInitialPhaseOffset}
+	 */
 	static decodeClockInitialPhaseOffset5(buffer) {
 		return this.#decodeClockInitialPhaseOffset(buffer)
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockInitialPhaseOffset5(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {PLLReset}
+	 */
 	static decodePLLReset(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
@@ -659,13 +720,17 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {PLLReset} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodePLLReset(param) {
 
 	}
 
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {CrystalInternalLoadCapacitance}
+	 */
 	static decodeCrystalInternalLoadCapacitance(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
@@ -679,7 +744,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {XXX} param
+	 * @param {CrystalInternalLoadCapacitance} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeCrystalInternalLoadCapacitance(param) {
