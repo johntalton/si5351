@@ -11,7 +11,8 @@ import { Converter } from './converter.js'
  * PinEnabledControl,
  * PLLInputSource,
  * ClockControl,
- * ClockDisabledState,
+ * ClockDisabledState7_4,
+ * ClockDisabledState3_0,
  * MultiSynthParameters0,
  * MultiSynthParameters1,
  * MultiSynthParameters2,
@@ -205,26 +206,26 @@ export class SI5351 {
 	*/
 	async setClockControl7(param) { return Common.setClockControl7(this.#abus, Converter.encodeClockControl7(param)) }
 
-	/** @returns {Promise<ClockDisabledState>} */
+	/** @returns {Promise<ClockDisabledState3_0>} */
 	async getClockDisableState3_0() {
 		const ab = await Common.getClockDisableState3_0(this.#abus)
 		return Converter.decodeClockDisableState3_0(ab)
 	}
 
 	/**
-	 * @param {ClockDisabledState} param
+	 * @param {ClockDisabledState3_0} param
 	 * @returns {Promise<void>}
 	*/
 	async setClockDisableState3_0(param) { return Common.setClockDisableState3_0(this.#abus, Converter.encodeClockDisableState3_0(param)) }
 
-	/** @returns {Promise<ClockDisabledState>} */
+	/** @returns {Promise<ClockDisabledState7_4>} */
 	async getClockDisableState7_4() {
 		const ab = await Common.getClockDisableState7_4(this.#abus)
 		return Converter.decodeClockDisableState7_4(ab)
 	}
 
 	/**
-	 * @param {ClockDisabledState} param
+	 * @param {ClockDisabledState7_4} param
 	 * @returns {Promise<void>}
 	*/
 	async setClockDisableState7_4(param) { return Common.setClockDisableState7_4(this.#abus, Converter.encodeClockDisableState7_4(param)) }
