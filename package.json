@@ -13,6 +13,7 @@
     "coverage": "c8 -r lcov -r text node --test"
   },
   "devDependencies": {
+    "@johntalton/and-other-delights": "^8.6.4",
     "c8": "^10.1.3"
   }
 }
