@@ -741,10 +741,9 @@ export class Converter {
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
 			new Uint8Array(buffer, 0, buffer.byteLength)
 
-		// todo
-		throw new Error('todo')
+		const [ p1 ] = u8
 		return {
-
+			p1
 		}
 	}
 
@@ -753,8 +752,7 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters6(param) {
-		// todo
-		throw new Error('todo')
+		return Uint8Array.from([ param.p1 ])
 	}
 
 	/**
@@ -766,10 +764,9 @@ export class Converter {
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
 			new Uint8Array(buffer, 0, buffer.byteLength)
 
-		// todo
-		throw new Error('todo')
+		const [ p1 ] = u8
 		return {
-
+			p1
 		}
 	}
 
@@ -778,8 +775,7 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters7(param) {
-		// todo
-		throw new Error('todo')
+		return Uint8Array.from([ param.p1 ])
 	}
 
 	/**

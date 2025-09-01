@@ -830,19 +830,43 @@ describe('Converter', () => {
 		})
 	})
 
-	describe('decodeMultiSynthParameters6', { skip: true }, () => {
+	describe('decodeMultiSynthParameters6', () => {
 		it('should decode', () => {
 			const u8 = Uint8Array.from([ 0b0000_0000 ])
 			const result = Converter.decodeMultiSynthParameters6(u8)
-			assert.equal(result, {})
+			assert.deepEqual(result, { p1: 0 })
+		})
+
+		it('should decode with unique value', () => {
+			const u8 = Uint8Array.from([ 0b1100_1000 ])
+			const result = Converter.decodeMultiSynthParameters6(u8)
+			assert.deepEqual(result, { p1: 200 })
+		})
+
+		it('should decode with unique value from ArrayBuffer', () => {
+			const u8 = Uint8Array.from([ 0b1100_1000 ])
+			const result = Converter.decodeMultiSynthParameters6(u8.buffer)
+			assert.deepEqual(result, { p1: 200 })
 		})
 	})
 
-	describe('decodeMultiSynthParameters7', { skip: true }, () => {
+	describe('decodeMultiSynthParameters7', () => {
 		it('should decode', () => {
 			const u8 = Uint8Array.from([ 0b0000_0000 ])
 			const result = Converter.decodeMultiSynthParameters7(u8)
-			assert.equal(result, {})
+			assert.deepEqual(result, { p1: 0 })
+		})
+
+		it('should decode with unique value', () => {
+			const u8 = Uint8Array.from([ 0b0011_1010 ])
+			const result = Converter.decodeMultiSynthParameters7(u8)
+			assert.deepEqual(result, { p1: 58 })
+		})
+
+		it('should decode with unique value from ArrayBuffer', () => {
+			const u8 = Uint8Array.from([ 0b0011_1010 ])
+			const result = Converter.decodeMultiSynthParameters7(u8.buffer)
+			assert.deepEqual(result, { p1: 58 })
 		})
 	})
 
@@ -1076,6 +1100,36 @@ describe('Converter', () => {
 
 			assert.equal(data, 0b0000_0000)
 		})
+
+		it('should encode with unique values', () => {
+			const ab = Converter.encodeInterruptStatusMask({
+				systemInitializing: true,
+				lossOfLockPLLA: false,
+				lossOfLockPLLB: true,
+				lossOfSignal: false
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b1100_0000)
+		})
+
+		it('should encode with more unique values', () => {
+			const ab = Converter.encodeInterruptStatusMask({
+				systemInitializing: false,
+				lossOfLockPLLA: true,
+				lossOfLockPLLB: false,
+				lossOfSignal: true
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0011_0000)
+		})
 	})
 
 	describe('encodeOutputEnableControl', () => {
@@ -1151,6 +1205,23 @@ describe('Converter', () => {
 			const [ data ] = u8
 
 			assert.equal(data, 0b0000_0000)
+		})
+
+		it('should encode with unique values', () => {
+			const ab = Converter.encodeClockControl0({
+				poweredDown: true,
+				integerMode: true,
+				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLB_OR_VCXO,
+				inverted: true,
+				inputSourceSelect: INPUT_SOURCE_SELECT.MULTI_SYNTH,
+				strength: STRENGTH.DRIVE_6_MA
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b1111_1110)
 		})
 	})
 
@@ -1516,7 +1587,7 @@ describe('Converter', () => {
 		})
 	})
 
-	describe('encodeMultiSynthParameters6', { skip: true }, () => {
+	describe('encodeMultiSynthParameters6', () => {
 		it('should encode', () => {
 			const ab = Converter.encodeMultiSynthParameters6({
 
@@ -1530,7 +1601,7 @@ describe('Converter', () => {
 		})
 	})
 
-	describe('encodeMultiSynthParameters7', { skip: true }, () => {
+	describe('encodeMultiSynthParameters7', () => {
 		it('should encode', () => {
 			const ab = Converter.encodeMultiSynthParameters7({
 

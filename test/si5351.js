@@ -21,7 +21,7 @@ class MockBus {
 
 	async readI2cBlock(address, cmd, length, target) {
 
-		this.readList.push({ address, cmd, length })
+		this.readList.push({ address, cmd, byteLength: length })
 
 		return {
 			bytesRead: length,
@@ -55,7 +55,7 @@ describe('SI5351', () => {
 			const result = await context.device.getDeviceStatus()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.DEVICE_STATUS)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -64,7 +64,7 @@ describe('SI5351', () => {
 			const result = await context.device.getInterruptStatusSticky()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.INTERRUPT_STATUS_STICKY)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -73,7 +73,7 @@ describe('SI5351', () => {
 			const result = await context.device.getInterruptStatusMask()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.INTERRUPT_STATUS_MASK)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -82,7 +82,7 @@ describe('SI5351', () => {
 			const result = await context.device.getOutputEnableControl()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.OUTPUT_ENABLE_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -91,7 +91,7 @@ describe('SI5351', () => {
 			const result = await context.device.getPinEnabledControl()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.OEB_PIN_ENABLED_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -100,7 +100,7 @@ describe('SI5351', () => {
 			const result = await context.device.getPLLInputSource()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.PLL_INPUT_SOURCE)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -109,7 +109,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockControl0()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK0_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -118,7 +118,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockControl1()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK1_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -127,7 +127,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockControl2()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK2_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -136,7 +136,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockControl3()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK3_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -145,7 +145,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockControl4()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK4_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -154,7 +154,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockControl5()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK5_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -163,7 +163,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockControl6()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK6_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -172,7 +172,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockControl7()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK7_CONTROL)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -181,7 +181,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockDisableState3_0()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK_3_0_DISABLE_STATE)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -190,7 +190,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockDisableState7_4()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK_7_4_DISABLE_STATE)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -199,7 +199,7 @@ describe('SI5351', () => {
 			const result = await context.device.getMultiSynthParameters0()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.MULTI_SYNTH_0_PARAMETERS)
-			assert.equal(context.bus.readList[0].length, 8)
+			assert.equal(context.bus.readList[0].byteLength, 8)
 		})
 	})
 
@@ -208,7 +208,7 @@ describe('SI5351', () => {
 			const result = await context.device.getMultiSynthParameters1()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.MULTI_SYNTH_1_PARAMETERS)
-			assert.equal(context.bus.readList[0].length, 8)
+			assert.equal(context.bus.readList[0].byteLength, 8)
 		})
 	})
 
@@ -217,7 +217,7 @@ describe('SI5351', () => {
 			const result = await context.device.getMultiSynthParameters2()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.MULTI_SYNTH_2_PARAMETERS)
-			assert.equal(context.bus.readList[0].length, 8)
+			assert.equal(context.bus.readList[0].byteLength, 8)
 		})
 	})
 
@@ -226,7 +226,7 @@ describe('SI5351', () => {
 			const result = await context.device.getMultiSynthParameters3()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.MULTI_SYNTH_3_PARAMETERS)
-			assert.equal(context.bus.readList[0].length, 8)
+			assert.equal(context.bus.readList[0].byteLength, 8)
 		})
 	})
 
@@ -235,7 +235,7 @@ describe('SI5351', () => {
 			const result = await context.device.getMultiSynthParameters4()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.MULTI_SYNTH_4_PARAMETERS)
-			assert.equal(context.bus.readList[0].length, 8)
+			assert.equal(context.bus.readList[0].byteLength, 8)
 		})
 	})
 
@@ -244,25 +244,25 @@ describe('SI5351', () => {
 			const result = await context.device.getMultiSynthParameters5()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.MULTI_SYNTH_5_PARAMETERS)
-			assert.equal(context.bus.readList[0].length, 8)
+			assert.equal(context.bus.readList[0].byteLength, 8)
 		})
 	})
 
-	describe('getMultiSynthParameters6', { skip: true }, () => {
+	describe('getMultiSynthParameters6', () => {
 		it('should get', async () => {
 			const result = await context.device.getMultiSynthParameters6()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.MULTI_SYNTH_6_PARAMETERS)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
-	describe('getMultiSynthParameters7', { skip: true }, () => {
+	describe('getMultiSynthParameters7', () => {
 		it('should get', async () => {
 			const result = await context.device.getMultiSynthParameters7()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.MULTI_SYNTH_7_PARAMETERS)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -271,7 +271,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockOutputDivider6_7()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLOCK_6_AND_7_OUTPUT_DIVIDER)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -280,7 +280,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockInitialPhaseOffset0()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK0_INITIAL_PHASE_OFFSET)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -289,7 +289,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockInitialPhaseOffset1()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK1_INITIAL_PHASE_OFFSET)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -298,7 +298,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockInitialPhaseOffset2()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK2_INITIAL_PHASE_OFFSET)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -307,7 +307,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockInitialPhaseOffset3()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK3_INITIAL_PHASE_OFFSET)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -316,7 +316,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockInitialPhaseOffset4()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK4_INITIAL_PHASE_OFFSET)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -325,7 +325,7 @@ describe('SI5351', () => {
 			const result = await context.device.getClockInitialPhaseOffset5()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK5_INITIAL_PHASE_OFFSET)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -334,7 +334,7 @@ describe('SI5351', () => {
 			const result = await context.device.getPLLReset()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.PLL_RESET)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -343,7 +343,7 @@ describe('SI5351', () => {
 			const result = await context.device.getCrystalInternalLoadCapacitance()
 			assert.equal(context.bus.readList.length, 1)
 			assert.equal(context.bus.readList[0].cmd, REGISTER.CRYSTAL_INTERNAL_LOAD_CAPACITANCE)
-			assert.equal(context.bus.readList[0].length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
 		})
 	})
 
@@ -587,7 +587,7 @@ describe('SI5351', () => {
 		})
 	})
 
-	describe('setMultiSynthParameters6', { skip: true }, () => {
+	describe('setMultiSynthParameters6', () => {
 		it('should set', async () => {
 			await context.device.setMultiSynthParameters6({
 
@@ -598,7 +598,7 @@ describe('SI5351', () => {
 		})
 	})
 
-	describe('setMultiSynthParameters7', { skip: true }, () => {
+	describe('setMultiSynthParameters7', () => {
 		it('should set', async () => {
 			await context.device.setMultiSynthParameters7({
 
@@ -686,8 +686,239 @@ describe('SI5351', () => {
 		})
 	})
 
+	describe('setCrystalInternalLoadCapacitance', () => {
+		it('should set', async () => {
+			await context.device.setCrystalInternalLoadCapacitance({
 
+			})
 
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CRYSTAL_INTERNAL_LOAD_CAPACITANCE)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+		})
+	})
 
+	//
+	//
+	//
 
+	describe('getClockInitialPhaseOffset', () => {
+		it('should get 0', async () => {
+			const result = await context.device.getClockInitialPhaseOffset(0)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK0_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+		})
+
+		it('should get 1', async () => {
+			const result = await context.device.getClockInitialPhaseOffset(1)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK1_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+		})
+
+		it('should get 2', async () => {
+			const result = await context.device.getClockInitialPhaseOffset(2)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK2_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+		})
+
+		it('should get 3', async () => {
+			const result = await context.device.getClockInitialPhaseOffset(3)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK3_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+		})
+
+		it('should get 4', async () => {
+			const result = await context.device.getClockInitialPhaseOffset(4)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK4_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+		})
+
+		it('should get 5', async () => {
+			const result = await context.device.getClockInitialPhaseOffset(5)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK5_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+		})
+
+		it('should reject when index out of bounds', async () => {
+			await assert.rejects(async () => await context.device.getClockInitialPhaseOffset(42))
+		})
+	})
+
+	describe('setClockInitialPhaseOffset', () => {
+		it('should set 0', async () => {
+			const result = await context.device.setClockInitialPhaseOffset(0, 0)
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK0_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+		})
+
+		it('should set 1', async () => {
+			const result = await context.device.setClockInitialPhaseOffset(1, 0)
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK1_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+		})
+
+		it('should set 2', async () => {
+			const result = await context.device.setClockInitialPhaseOffset(2, 0)
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK2_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+		})
+
+		it('should set 3', async () => {
+			const result = await context.device.setClockInitialPhaseOffset(3, 0)
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK3_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+		})
+
+		it('should set 4', async () => {
+			const result = await context.device.setClockInitialPhaseOffset(4, 0)
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK4_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+		})
+
+		it('should set 5', async () => {
+			const result = await context.device.setClockInitialPhaseOffset(5, 0)
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK5_INITIAL_PHASE_OFFSET)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+		})
+
+		it('should reject when index out of bounds', async () => {
+			await assert.rejects(async () => await context.device.setClockInitialPhaseOffset(42, 0))
+		})
+	})
+
+	describe('getClockControl', () => {
+		it('should get 0', async () => {
+			const result = await context.device.getClockControl(0)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK0_CONTROL)
+		})
+
+		it('should get 1', async () => {
+			const result = await context.device.getClockControl(1)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK1_CONTROL)
+		})
+
+		it('should get 2', async () => {
+			const result = await context.device.getClockControl(2)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK2_CONTROL)
+		})
+
+		it('should get 3', async () => {
+			const result = await context.device.getClockControl(3)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK3_CONTROL)
+		})
+
+		it('should get 4', async () => {
+			const result = await context.device.getClockControl(4)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK4_CONTROL)
+		})
+
+		it('should get 5', async () => {
+			const result = await context.device.getClockControl(5)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK5_CONTROL)
+		})
+
+		it('should get 6', async () => {
+			const result = await context.device.getClockControl(6)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK6_CONTROL)
+		})
+
+		it('should get 7', async () => {
+			const result = await context.device.getClockControl(7)
+			assert.equal(context.bus.readList.length, 1)
+			assert.equal(context.bus.readList[0].byteLength, 1)
+			assert.equal(context.bus.readList[0].cmd, REGISTER.CLK7_CONTROL)
+		})
+
+		it('should reject when index ouf or bounds', async () => {
+			await assert.rejects(async () => await context.device.getClockControl(42))
+		})
+	})
+
+	describe('setClockControl', () => {
+		it('should set 0', async () => {
+			await context.device.setClockControl(0, {})
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK0_CONTROL)
+		})
+
+		it('should set 1', async () => {
+			await context.device.setClockControl(1, {})
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK1_CONTROL)
+		})
+
+		it('should set 2', async () => {
+			await context.device.setClockControl(2, {})
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK2_CONTROL)
+		})
+
+		it('should set 3', async () => {
+			await context.device.setClockControl(3, {})
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK3_CONTROL)
+		})
+
+		it('should set 4', async () => {
+			await context.device.setClockControl(4, {})
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK4_CONTROL)
+		})
+
+		it('should set 5', async () => {
+			await context.device.setClockControl(5, {})
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK5_CONTROL)
+		})
+
+		it('should set 6', async () => {
+			await context.device.setClockControl(6, {})
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK6_CONTROL)
+		})
+
+		it('should set 7', async () => {
+			await context.device.setClockControl(7, {})
+			assert.equal(context.bus.writeList.length, 1)
+			assert.equal(context.bus.writeList[0].byteLength, 1)
+			assert.equal(context.bus.writeList[0].cmd, REGISTER.CLK7_CONTROL)
+		})
+
+		it('should reject when index ouf or bounds', async () => {
+			await assert.rejects(async () => await context.device.setClockControl(42, {}))
+		})
+	})
 })
