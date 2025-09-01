@@ -1,10 +1,5 @@
 import {
-	MULTI_SYNTH_PARAMETER_0_SIZE,
-	MULTI_SYNTH_PARAMETER_1_SIZE,
-	MULTI_SYNTH_PARAMETER_2_SIZE,
-	MULTI_SYNTH_PARAMETER_3_SIZE,
-	MULTI_SYNTH_PARAMETER_4_SIZE,
-	MULTI_SYNTH_PARAMETER_5_SIZE,
+	MULTI_SYNTH_PARAMETER_0_5_SIZE,
 	MULTI_SYNTH_PARAMETER_6_SIZE,
 	MULTI_SYNTH_PARAMETER_7_SIZE,
 	REGISTER,
@@ -149,7 +144,7 @@ export class Common {
 	 * @returns {Promise<I2CBufferSource>}
 	*/
 	static async getMultiSynthParameters0(bus) {
-		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_0_PARAMETERS, MULTI_SYNTH_PARAMETER_0_SIZE)
+		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_0_PARAMETERS, MULTI_SYNTH_PARAMETER_0_5_SIZE)
 	}
 
 	/**
@@ -157,7 +152,7 @@ export class Common {
 	 * @returns {Promise<I2CBufferSource>}
 	*/
 	static async getMultiSynthParameters1(bus) {
-		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_1_PARAMETERS, MULTI_SYNTH_PARAMETER_1_SIZE)
+		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_1_PARAMETERS, MULTI_SYNTH_PARAMETER_0_5_SIZE)
 	}
 
 	/**
@@ -165,7 +160,7 @@ export class Common {
 	 * @returns {Promise<I2CBufferSource>}
 	*/
 	static async getMultiSynthParameters2(bus) {
-		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_2_PARAMETERS, MULTI_SYNTH_PARAMETER_2_SIZE)
+		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_2_PARAMETERS, MULTI_SYNTH_PARAMETER_0_5_SIZE)
 	}
 
 	/**
@@ -173,7 +168,7 @@ export class Common {
 	 * @returns {Promise<I2CBufferSource>}
 	*/
 	static async getMultiSynthParameters3(bus) {
-		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_3_PARAMETERS, MULTI_SYNTH_PARAMETER_3_SIZE)
+		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_3_PARAMETERS, MULTI_SYNTH_PARAMETER_0_5_SIZE)
 	}
 
 	/**
@@ -181,7 +176,7 @@ export class Common {
 	 * @returns {Promise<I2CBufferSource>}
 	*/
 	static async getMultiSynthParameters4(bus) {
-		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_4_PARAMETERS, MULTI_SYNTH_PARAMETER_4_SIZE)
+		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_4_PARAMETERS, MULTI_SYNTH_PARAMETER_0_5_SIZE)
 	}
 
 	/**
@@ -189,7 +184,7 @@ export class Common {
 	 * @returns {Promise<I2CBufferSource>}
 	*/
 	static async getMultiSynthParameters5(bus) {
-		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_5_PARAMETERS, MULTI_SYNTH_PARAMETER_5_SIZE)
+		return bus.readI2cBlock(REGISTER.MULTI_SYNTH_5_PARAMETERS, MULTI_SYNTH_PARAMETER_0_5_SIZE)
 	}
 
 	/**

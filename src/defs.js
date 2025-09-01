@@ -130,27 +130,11 @@ export const DISABLED_STATE = {
 /** @typedef {ClockDisabledState7_4 & ClockDisabledState3_0} ClockDisabledState */
 
 /**
- * @typedef {Object} MultiSynthParameters0
- */
-
-/**
- * @typedef {Object} MultiSynthParameters1
- */
-
-/**
- * @typedef {Object} MultiSynthParameters2
- */
-
-/**
- * @typedef {Object} MultiSynthParameters3
- */
-
-/**
- * @typedef {Object} MultiSynthParameters4
- */
-
-/**
- * @typedef {Object} MultiSynthParameters5
+ * @typedef {Object} MultiSynthParameters
+ * @property {number} p1
+ * @property {number} p2
+ * @property {number} p3
+ * @property {number} div
  */
 
 /**
@@ -207,26 +191,21 @@ export const CRYSTAL_CAPACITANCE = {
  */
 
 
-
-
-
-
 export const DEFAULT_ADDRESS = 0x60
 
 export const SINGLE_BYTE = 1
-export const MULTI_SYNTH_PARAMETER_0_SIZE = 8
-export const MULTI_SYNTH_PARAMETER_1_SIZE = 10
-export const MULTI_SYNTH_PARAMETER_2_SIZE = 6
-export const MULTI_SYNTH_PARAMETER_3_SIZE = 8
-export const MULTI_SYNTH_PARAMETER_4_SIZE = 8
-export const MULTI_SYNTH_PARAMETER_5_SIZE = 8
+export const MULTI_SYNTH_PARAMETER_0_5_SIZE = 8
 export const MULTI_SYNTH_PARAMETER_6_SIZE = 1
 export const MULTI_SYNTH_PARAMETER_7_SIZE = 1
 
-export const SINGLE_BIT_MASK = 0b1
-export const TWO_BIT_MASK = 0b11
-export const THREE_BIT_MASK = 0b111
-
+export const SINGLE_BIT_MASK = 0b0000_0001
+export const TWO_BIT_MASK =    0b0000_0011
+export const THREE_BIT_MASK =  0b0000_0111
+export const FOUR_BIT_MASK =   0b0000_1111
+export const SEVEN_BIT_MASK =  0b0111_1111
+export const EIGHT_BIT_MASK =  0xFF
+export const EIGHTEEN_BIT_MASK = 0x03_FF_FF
+export const TWENTY_BIT_MASK = 0x0F_FF_FF
 
 export const REGISTER = {
 	DEVICE_STATUS: 0,
@@ -249,63 +228,13 @@ export const REGISTER = {
 	CLK_3_0_DISABLE_STATE: 24,
 	CLK_7_4_DISABLE_STATE: 25,
 	// 26 - 41 PLL, MultiSynth, and output clock delay offset Configuration Registers.
-	// MultiSynth 0
 	MULTI_SYNTH_0_PARAMETERS: 42,
-	// MULTI_SYNTH_0_PARAMETERS: 43,
-	// MULTI_SYNTH_0_PARAMETERS: 44,
-	// MULTI_SYNTH_0_PARAMETERS: 45,
-	// MULTI_SYNTH_0_PARAMETERS: 46,
-	// MULTI_SYNTH_0_PARAMETERS: 47,
-	// MULTI_SYNTH_0_PARAMETERS: 48,
-	// MULTI_SYNTH_0_PARAMETERS: 49,
-	// MultiSynth 1
 	MULTI_SYNTH_1_PARAMETERS: 50,
-	// MULTI_SYNTH_1_PARAMETERS: 51,
-	// MULTI_SYNTH_1_PARAMETERS: 52,
-	// MULTI_SYNTH_1_PARAMETERS: 53,
-	// MULTI_SYNTH_1_PARAMETERS: 54,
-	// MULTI_SYNTH_1_PARAMETERS: 55,
-	// MULTI_SYNTH_1_PARAMETERS: 56,
-	// MULTI_SYNTH_1_PARAMETERS: 57,
-	// MULTI_SYNTH_1_PARAMETERS: 58,
-	// MULTI_SYNTH_1_PARAMETERS: 59,
-	// MultiSynth 2
-	MULTI_SYNTH_2_PARAMETERS: 60,
-	// MULTI_SYNTH_2_PARAMETERS: 61,
-	// MULTI_SYNTH_2_PARAMETERS: 62,
-	// MULTI_SYNTH_2_PARAMETERS: 63,
-	// MULTI_SYNTH_2_PARAMETERS: 64,
-	// MULTI_SYNTH_2_PARAMETERS: 65,
-	// MultiSynth 3
+	MULTI_SYNTH_2_PARAMETERS: 58,
 	MULTI_SYNTH_3_PARAMETERS: 66,
-	// MULTI_SYNTH_3_PARAMETERS: 67,
-	// MULTI_SYNTH_3_PARAMETERS: 68,
-	// MULTI_SYNTH_3_PARAMETERS: 69,
-	// MULTI_SYNTH_3_PARAMETERS: 70,
-	// MULTI_SYNTH_3_PARAMETERS: 71,
-	// MULTI_SYNTH_3_PARAMETERS: 72,
-	// MULTI_SYNTH_3_PARAMETERS: 73,
-	// MultiSynth 4
 	MULTI_SYNTH_4_PARAMETERS: 74,
-	// MULTI_SYNTH_4_PARAMETERS: 75,
-	// MULTI_SYNTH_4_PARAMETERS: 76,
-	// MULTI_SYNTH_4_PARAMETERS: 77,
-	// MULTI_SYNTH_4_PARAMETERS: 78,
-	// MULTI_SYNTH_4_PARAMETERS: 79,
-	// MULTI_SYNTH_4_PARAMETERS: 80,
-	// MULTI_SYNTH_4_PARAMETERS: 81,
-	// MultiSynth 5
 	MULTI_SYNTH_5_PARAMETERS: 82,
-	// MULTI_SYNTH_5_PARAMETERS: 83,
-	// MULTI_SYNTH_5_PARAMETERS: 84,
-	// MULTI_SYNTH_5_PARAMETERS: 85,
-	// MULTI_SYNTH_5_PARAMETERS: 86,
-	// MULTI_SYNTH_5_PARAMETERS: 87,
-	// MULTI_SYNTH_5_PARAMETERS: 88,
-	// MULTI_SYNTH_5_PARAMETERS: 89,
-	// MultiSynth 6
 	MULTI_SYNTH_6_PARAMETERS: 90,
-	// MultiSynth 7
 	MULTI_SYNTH_7_PARAMETERS: 91,
 	//
 	CLOCK_6_AND_7_OUTPUT_DIVIDER: 92,

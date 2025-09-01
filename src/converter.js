@@ -1,4 +1,14 @@
-import { SINGLE_BIT_MASK, THREE_BIT_MASK, TWO_BIT_MASK } from './defs.js'
+import {
+	EIGHT_BIT_MASK,
+	EIGHTEEN_BIT_MASK,
+	FOUR_BIT_MASK,
+	MULTI_SYNTH_PARAMETER_0_5_SIZE,
+	SEVEN_BIT_MASK,
+	SINGLE_BIT_MASK,
+	THREE_BIT_MASK,
+	TWENTY_BIT_MASK,
+	TWO_BIT_MASK
+} from './defs.js'
 
 /**
  * @import { I2CBufferSource } from '@johntalton/and-other-delights'
@@ -12,12 +22,7 @@ import { SINGLE_BIT_MASK, THREE_BIT_MASK, TWO_BIT_MASK } from './defs.js'
  * ClockControl,
  * ClockDisabledState7_4,
  * ClockDisabledState3_0,
- * MultiSynthParameters0,
- * MultiSynthParameters1,
- * MultiSynthParameters2,
- * MultiSynthParameters3,
- * MultiSynthParameters4,
- * MultiSynthParameters5,
+ * MultiSynthParameters,
  * MultiSynthParameters6,
  * MultiSynthParameters7,
  * ClockOutputDivider,
@@ -558,152 +563,173 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {MultiSynthParameters0}
+	 * @returns {MultiSynthParameters}
 	*/
-	static decodeMultiSynthParameters0(buffer) {
+	static #decodeMultiSynthParameters(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
 			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
 			new Uint8Array(buffer, 0, buffer.byteLength)
 
-		// todo
-		throw new Error('todo')
-		return {
+		if(u8.byteLength !== MULTI_SYNTH_PARAMETER_0_5_SIZE) { throw new Error('byteLength invalid') }
 
+		const [
+			p3_msb,
+			p3_lsb,
+			div_p1_xsb,
+			p1_msb,
+			p1_lsb,
+			p3_xsb_p2_xsb,
+			p2_msb,
+			p2_lsb
+		] = u8
+
+		const div = (div_p1_xsb >> 4) & THREE_BIT_MASK
+		const p1_xsb = (div_p1_xsb >> 0) & TWO_BIT_MASK
+		const p2_xsb = (p3_xsb_p2_xsb >> 0) & FOUR_BIT_MASK
+		const p3_xsb = (p3_xsb_p2_xsb >> 4) & FOUR_BIT_MASK
+
+		const p1 = (p1_xsb << 16) | (p1_msb << 8) | (p1_lsb)
+		const p2 = (p2_xsb << 16) | (p2_msb << 8) | (p2_lsb)
+		const p3 = (p3_xsb << 16) | (p3_msb << 8) | (p3_lsb)
+
+		return {
+			p1, p2, p3, div
 		}
 	}
 
 	/**
-	 * @param {MultiSynthParameters0} param
+	 * @param {MultiSynthParameters} param
+	 * @returns {I2CBufferSource}
+	 */
+	static #encodeMultiSynthParameters(param) {
+		const { p1, p2, p3, div } = param
+
+		if((p1 & EIGHTEEN_BIT_MASK) !== p1) { throw new Error('p1 out of bounds') }
+		if((p2 & TWENTY_BIT_MASK) !== p2) { throw new Error('p2 out of bounds') }
+		if((p3 & TWENTY_BIT_MASK) !== p3) { throw new Error('p3 out of bounds') }
+		if((div & THREE_BIT_MASK) !== div) { throw new Error('div out of bounds') }
+
+		const p1_xsb = (p1 >> 16) & TWO_BIT_MASK
+		const p1_msb = (p1 >> 8) & EIGHT_BIT_MASK
+		const p1_lsb = (p1 >> 0) & EIGHT_BIT_MASK
+
+		const p2_xsb = (p2 >> 16) & FOUR_BIT_MASK
+		const p2_msb = (p2 >> 8) & EIGHT_BIT_MASK
+		const p2_lsb = (p2 >> 0) & EIGHT_BIT_MASK
+
+		const p3_xsb = (p3 >> 16) & FOUR_BIT_MASK
+		const p3_msb = (p3 >> 8) & EIGHT_BIT_MASK
+		const p3_lsb = (p3 >> 0) & EIGHT_BIT_MASK
+
+		const div_p1_xsb = ((div & THREE_BIT_MASK) << 4) | (p1_xsb)
+		const p3_xsb_p2_xsb = (p3_xsb << 4) | (p2_xsb)
+
+		return Uint8Array.from([
+			p3_msb,
+			p3_lsb,
+			div_p1_xsb,
+			p1_msb,
+			p1_lsb,
+			p3_xsb_p2_xsb,
+			p2_msb,
+			p2_lsb
+		])
+	}
+
+	/**
+	 * @param {I2CBufferSource} buffer
+	 * @returns {MultiSynthParameters}
+	*/
+	static decodeMultiSynthParameters0(buffer) {
+		return Converter.#decodeMultiSynthParameters(buffer)
+	}
+
+	/**
+	 * @param {MultiSynthParameters} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters0(param) {
-		// todo
-		throw new Error('todo')
+		return Converter.#encodeMultiSynthParameters(param)
 	}
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {MultiSynthParameters1}
+	 * @returns {MultiSynthParameters}
 	*/
 	static decodeMultiSynthParameters1(buffer) {
-		const u8 = ArrayBuffer.isView(buffer) ?
-			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
-			new Uint8Array(buffer, 0, buffer.byteLength)
-
-		// todo
-		throw new Error('todo')
-		return {
-
-		}
+		return Converter.#decodeMultiSynthParameters(buffer)
 	}
 
 	/**
-	 * @param {MultiSynthParameters1} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters1(param) {
-		// todo
-		throw new Error('todo')
+		return Converter.#encodeMultiSynthParameters(param)
 	}
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {MultiSynthParameters2}
+	 * @returns {MultiSynthParameters}
 	*/
 	static decodeMultiSynthParameters2(buffer) {
-		const u8 = ArrayBuffer.isView(buffer) ?
-			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
-			new Uint8Array(buffer, 0, buffer.byteLength)
-
-		// todo
-		throw new Error('todo')
-		return {
-
-		}
+		return Converter.#decodeMultiSynthParameters(buffer)
 	}
 
 	/**
-	 * @param {MultiSynthParameters2} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters2(param) {
-		// todo
-		throw new Error('todo')
+		return Converter.#encodeMultiSynthParameters(param)
 	}
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {MultiSynthParameters3}
+	 * @returns {MultiSynthParameters}
 	*/
 	static decodeMultiSynthParameters3(buffer) {
-		const u8 = ArrayBuffer.isView(buffer) ?
-			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
-			new Uint8Array(buffer, 0, buffer.byteLength)
-
-		// todo
-		throw new Error('todo')
-		return {
-
-		}
+		return Converter.#decodeMultiSynthParameters(buffer)
 	}
 
 	/**
-	 * @param {MultiSynthParameters3} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters3(param) {
-		// todo
-		throw new Error('todo')
+		return Converter.#encodeMultiSynthParameters(param)
 	}
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {MultiSynthParameters4}
+	 * @returns {MultiSynthParameters}
 	*/
 	static decodeMultiSynthParameters4(buffer) {
-		const u8 = ArrayBuffer.isView(buffer) ?
-			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
-			new Uint8Array(buffer, 0, buffer.byteLength)
-
-		// todo
-		throw new Error('todo')
-		return {
-
-		}
+		return Converter.#decodeMultiSynthParameters(buffer)
 	}
 
 	/**
-	 * @param {MultiSynthParameters4} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters4(param) {
-		// todo
-		throw new Error('todo')
+		return Converter.#encodeMultiSynthParameters(param)
 	}
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {MultiSynthParameters5}
+	 * @returns {MultiSynthParameters}
 	*/
 	static decodeMultiSynthParameters5(buffer) {
-		const u8 = ArrayBuffer.isView(buffer) ?
-			new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) :
-			new Uint8Array(buffer, 0, buffer.byteLength)
-
-		// todo
-		throw new Error('todo')
-		return {
-
-		}
+		return Converter.#decodeMultiSynthParameters(buffer)
 	}
 
 	/**
-	 * @param {MultiSynthParameters5} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters5(param) {
-		// todo
-		throw new Error('todo')
+		return Converter.#encodeMultiSynthParameters(param)
 	}
 
 	/**
@@ -800,7 +826,7 @@ export class Converter {
 
 		const [ data ] = u8
 
-		const CLKX_PHOFF = data & 0b0111_1111
+		const CLKX_PHOFF = data & SEVEN_BIT_MASK
 
 		return CLKX_PHOFF
 	}
@@ -810,7 +836,7 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static #encodeClockInitialPhaseOffset(param) {
-		if((param & 0b0111_1111) !== param) { throw new RangeError('invalid phase offset')}
+		if((param & SEVEN_BIT_MASK) !== param) { throw new RangeError('invalid phase offset')}
 		const data = param
 
 		return Uint8Array.from([ data ])

@@ -13,12 +13,7 @@ import { Converter } from './converter.js'
  * ClockControl,
  * ClockDisabledState7_4,
  * ClockDisabledState3_0,
- * MultiSynthParameters0,
- * MultiSynthParameters1,
- * MultiSynthParameters2,
- * MultiSynthParameters3,
- * MultiSynthParameters4,
- * MultiSynthParameters5,
+ * MultiSynthParameters,
  * MultiSynthParameters6,
  * MultiSynthParameters7,
  * ClockOutputDivider,
@@ -38,7 +33,7 @@ export class SI5351 {
 
 	/**
 	 * @param {I2CAddressedBus} abus
-	 * @param {SI5351Options} options
+	 * @param {SI5351Options} [options]
 	 */
 	constructor(abus, options) {
 		this.#abus = abus
@@ -299,84 +294,84 @@ export class SI5351 {
 		return Common.setClockDisableState7_4(this.#abus, Converter.encodeClockDisableState7_4(param))
 	}
 
-	/** @returns {Promise<MultiSynthParameters0>} */
+	/** @returns {Promise<MultiSynthParameters>} */
 	async getMultiSynthParameters0() {
 		const ab = await Common.getMultiSynthParameters0(this.#abus)
 		return Converter.decodeMultiSynthParameters0(ab)
 	}
 
 	/**
-	 * @param {MultiSynthParameters0} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {Promise<void>}
 	*/
 	async setMultiSynthParameters0(param) {
 		return Common.setMultiSynthParameters0(this.#abus, Converter.encodeMultiSynthParameters0(param))
 	}
 
-	/** @returns {Promise<MultiSynthParameters1>} */
+	/** @returns {Promise<MultiSynthParameters>} */
 	async getMultiSynthParameters1() {
 		const ab = await Common.getMultiSynthParameters1(this.#abus)
 		return Converter.decodeMultiSynthParameters1(ab)
 	}
 
 	/**
-	 * @param {MultiSynthParameters1} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {Promise<void>}
 	*/
 	async setMultiSynthParameters1(param) {
 		return Common.setMultiSynthParameters1(this.#abus, Converter.encodeMultiSynthParameters1(param))
 	}
 
-	/** @returns {Promise<MultiSynthParameters2>} */
+	/** @returns {Promise<MultiSynthParameters>} */
 	async getMultiSynthParameters2() {
 		const ab = await Common.getMultiSynthParameters2(this.#abus)
 		return Converter.decodeMultiSynthParameters2(ab)
 	}
 
 	/**
-	 * @param {MultiSynthParameters2} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {Promise<void>}
 	*/
 	async setMultiSynthParameters2(param) {
 		return Common.setMultiSynthParameters2(this.#abus, Converter.encodeMultiSynthParameters2(param))
 	}
 
-	/** @returns {Promise<MultiSynthParameters3>} */
+	/** @returns {Promise<MultiSynthParameters>} */
 	async getMultiSynthParameters3() {
 		const ab = await Common.getMultiSynthParameters3(this.#abus)
 		return Converter.decodeMultiSynthParameters3(ab)
 	}
 
 	/**
-	 * @param {MultiSynthParameters3} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {Promise<void>}
 	*/
 	async setMultiSynthParameters3(param) {
 		return Common.setMultiSynthParameters3(this.#abus, Converter.encodeMultiSynthParameters3(param))
 	}
 
-	/** @returns {Promise<MultiSynthParameters4>} */
+	/** @returns {Promise<MultiSynthParameters>} */
 	async getMultiSynthParameters4() {
 		const ab = await Common.getMultiSynthParameters4(this.#abus)
 		return Converter.decodeMultiSynthParameters4(ab)
 	}
 
 	/**
-	 * @param {MultiSynthParameters4} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {Promise<void>}
 	*/
 	async setMultiSynthParameters4(param) {
 		return Common.setMultiSynthParameters4(this.#abus, Converter.encodeMultiSynthParameters4(param))
 	}
 
-	/** @returns {Promise<MultiSynthParameters5>} */
+	/** @returns {Promise<MultiSynthParameters>} */
 	async getMultiSynthParameters5() {
 		const ab = await Common.getMultiSynthParameters5(this.#abus)
 		return Converter.decodeMultiSynthParameters5(ab)
 	}
 
 	/**
-	 * @param {MultiSynthParameters5} param
+	 * @param {MultiSynthParameters} param
 	 * @returns {Promise<void>}
 	*/
 	async setMultiSynthParameters5(param) {
