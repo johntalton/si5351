@@ -71,7 +71,7 @@ export class Converter {
 		const LOS_STKY = (data >> 4) & SINGLE_BIT_MASK
 
 		return {
-			systemCalibrationStatus :SYS_INIT_STKY === 1 ,
+			systemCalibrationStatus: SYS_INIT_STKY === 1 ,
 			lossOfLockPLLB: LOL_B_STKY === 1,
 			lossOfLockPLLA: LOL_A_STKY === 1,
 			lossOfSignal: LOS_STKY === 1
@@ -79,13 +79,26 @@ export class Converter {
 	}
 
 	/**
-	 * @param {InterruptStatusSticky} param
+	 * @param {Partial<InterruptStatusSticky>} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeInterruptStatusSticky(param) {
+		const systemCalibrationStatus = param.systemCalibrationStatus ?? true
+		const lossOfLockPLLB = param.lossOfLockPLLB ?? true
+		const lossOfLockPLLA = param.lossOfLockPLLA ?? true
+		const lossOfSignal = param.lossOfSignal ?? true
+
+		const SYS_INIT_STKY = (systemCalibrationStatus ? 1 : 0) << 7
+		const LOL_B_STKY = (lossOfLockPLLB ? 1 : 0) << 6
+		const LOL_A_STKY = (lossOfLockPLLA ? 1 : 0) << 5
+		const LOS_STKY = (lossOfSignal ? 1 : 0) << 4
+
 		const data = 0
-		// todo
-		throw new Error('todo')
+			| SYS_INIT_STKY
+			| LOL_B_STKY
+			| LOL_A_STKY
+			| LOS_STKY
+
 		return Uint8Array.from([ data ])
 	}
 
@@ -118,9 +131,12 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeInterruptStatusMask(param) {
-		const data = 0
-		// todo
-		throw new Error('todo')
+		const SYS_INIT_MASK = (param.systemInitializing ? 1 : 0) << 7
+		const LOL_B_MASK = (param.lossOfLockPLLB ? 1 : 0) << 6
+		const LOL_A_MASK = (param.lossOfLockPLLA ? 1 : 0) << 5
+		const LOS_MASK = (param.lossOfSignal ? 1 : 0) << 4
+
+		const data = SYS_INIT_MASK | LOL_B_MASK | LOL_A_MASK | LOS_MASK
 		return Uint8Array.from([ data ])
 	}
 
@@ -161,9 +177,25 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeOutputEnableControl(param) {
+		const CLK7_OEB = (param.clock7 ? 0 : 1) << 7
+		const CLK6_OEB = (param.clock6 ? 0 : 1) << 6
+		const CLK5_OEB = (param.clock5 ? 0 : 1) << 5
+		const CLK4_OEB = (param.clock4 ? 0 : 1) << 4
+		const CLK3_OEB = (param.clock3 ? 0 : 1) << 3
+		const CLK2_OEB = (param.clock2 ? 0 : 1) << 2
+		const CLK1_OEB = (param.clock1 ? 0 : 1) << 1
+		const CLK0_OEB = (param.clock0 ? 0 : 1) << 0
+
 		const data = 0
-		// todo
-		throw new Error('todo')
+			| CLK7_OEB
+			| CLK6_OEB
+			| CLK5_OEB
+			| CLK4_OEB
+			| CLK3_OEB
+			| CLK2_OEB
+			| CLK1_OEB
+			| CLK0_OEB
+
 		return Uint8Array.from([ data ])
 	}
 
@@ -204,9 +236,25 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodePinEnabledControl(param) {
+		const OEB_CLK7 = (param.clock7 ? 0 : 1) << 7
+		const OEB_CLK6 = (param.clock6 ? 0 : 1) << 6
+		const OEB_CLK5 = (param.clock5 ? 0 : 1) << 5
+		const OEB_CLK4 = (param.clock4 ? 0 : 1) << 4
+		const OEB_CLK3 = (param.clock3 ? 0 : 1) << 3
+		const OEB_CLK2 = (param.clock2 ? 0 : 1) << 2
+		const OEB_CLK1 = (param.clock1 ? 0 : 1) << 1
+		const OEB_CLK0 = (param.clock0 ? 0 : 1) << 0
+
 		const data = 0
-		// todo
-		throw new Error('todo')
+			| OEB_CLK7
+			| OEB_CLK6
+			| OEB_CLK5
+			| OEB_CLK4
+			| OEB_CLK3
+			| OEB_CLK2
+			| OEB_CLK1
+			| OEB_CLK0
+
 		return Uint8Array.from([ data ])
 	}
 
@@ -225,8 +273,8 @@ export class Converter {
 		const PLLA_SRC = (data >> 2) & SINGLE_BIT_MASK
 
 		return {
-			sourcePPLB: PLLB_SRC,
-			sourcePPLA: PLLA_SRC
+			sourcePLLB: PLLB_SRC,
+			sourcePLLA: PLLA_SRC
 		}
 	}
 
@@ -235,9 +283,11 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodePLLInputSource(param) {
-		const data = 0
-		// todo
-		throw new Error('todo')
+		const PLLB_SRC = (param.sourcePLLB)
+		const PLLA_SRC = (param.sourcePLLA)
+
+		const data = 0 | PLLB_SRC | PLLA_SRC
+
 		return Uint8Array.from([ data ])
 	}
 
@@ -270,24 +320,35 @@ export class Converter {
 	}
 
 	/**
+	 * @param {ClockControl} param
+	 * @returns {I2CBufferSource}
+	 */
+	static #encodeClockControl(param) {
+		const CLKX_PDN = (param.poweredDown ? 1 : 0) << 7
+		const MSX_INT = (param.integerMode ? 1 : 0) << 6
+		const MSX_SRC = (param.multiSynthSourceSelect) << 5
+		const CLKX_INV = (param.inverted ? 1 : 0) << 4
+		const CLKX_SRC = (param.inputSourceSelect) << 2
+		const CLKX_IDRV = (param.strength) << 0
+
+		const data = 0
+			| CLKX_PDN
+			| MSX_INT
+			| MSX_SRC
+			| CLKX_INV
+			| CLKX_SRC
+			| CLKX_IDRV
+
+		return Uint8Array.from([ data ])
+	}
+
+	/**
 	 * @param {I2CBufferSource} buffer
 	 * @returns {ClockControl}
 	*/
 	static decodeClockControl0(buffer) {
 		return Converter.#decodeClockControl(buffer)
 	}
-
-	/**
-	 * @param {ClockControl} param
-	 * @returns {I2CBufferSource}
-	 */
-	static #encodeClockControl(param) {
-		const data = 0
-		// todo
-		throw new Error('todo')
-		return Uint8Array.from([ data ])
-	}
-
 
 	/**
 	 * @param {ClockControl} param
@@ -438,9 +499,17 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockDisableState3_0(param) {
+		const CLK3_DIS_STATE = (param.clock3) >> 6
+		const CLK2_DIS_STATE = (param.clock2) >> 4
+		const CLK1_DIS_STATE = (param.clock1) >> 2
+		const CLK0_DIS_STATE = (param.clock0) >> 0
+
 		const data = 0
-		// todo
-		throw new Error('todo')
+			| CLK3_DIS_STATE
+			| CLK2_DIS_STATE
+			| CLK1_DIS_STATE
+			| CLK0_DIS_STATE
+
 		return Uint8Array.from([ data ])
 	}
 
@@ -473,9 +542,17 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockDisableState7_4(param) {
+		const CLK7_DIS_STATE = (param.clock7) >> 6
+		const CLK6_DIS_STATE = (param.clock6) >> 4
+		const CLK5_DIS_STATE = (param.clock5) >> 2
+		const CLK4_DIS_STATE = (param.clock4) >> 0
+
 		const data = 0
-		// todo
-		throw new Error('todo')
+			| CLK7_DIS_STATE
+			| CLK6_DIS_STATE
+			| CLK5_DIS_STATE
+			| CLK4_DIS_STATE
+
 		return Uint8Array.from([ data ])
 	}
 
@@ -704,9 +781,11 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockOutputDivider6_7(param) {
-		const data = 0
-		// todo
-		throw new Error('todo')
+		const R7_DIV = (param.dividerR7) >> 4
+		const R6_DIV = (param.dividerR6) >> 0
+
+		const data = 0 | R7_DIV | R6_DIV
+
 		return Uint8Array.from([ data ])
 	}
 
@@ -727,22 +806,22 @@ export class Converter {
 	}
 
 	/**
+	 * @param {ClockInitialPhaseOffset} param
+	 * @returns {I2CBufferSource}
+	 */
+	static #encodeClockInitialPhaseOffset(param) {
+		if((param & 0b0111_1111) !== param) { throw new RangeError('invalid phase offset')}
+		const data = param
+
+		return Uint8Array.from([ data ])
+	}
+
+	/**
 	 * @param {I2CBufferSource} buffer
 	 * @returns {ClockInitialPhaseOffset}
 	 */
 	static decodeClockInitialPhaseOffset0(buffer) {
 		return this.#decodeClockInitialPhaseOffset(buffer)
-	}
-
-	/**
-	 * @param {ClockInitialPhaseOffset} buffer
-	 * @returns {I2CBufferSource}
-	 */
-	static #encodeClockInitialPhaseOffset(buffer) {
-		const data = 0
-		// todo
-		throw new Error('todo')
-		return Uint8Array.from([ data ])
 	}
 
 	/**
@@ -844,8 +923,8 @@ export class Converter {
 
 		const [ data ] = u8
 
-		const PLLA_RST = (data >> 7) & SINGLE_BIT_MASK
-		const PLLB_RST = (data >> 5) & SINGLE_BIT_MASK
+		const PLLB_RST = (data >> 7) & SINGLE_BIT_MASK
+		const PLLA_RST = (data >> 5) & SINGLE_BIT_MASK
 
 		return {
 			resetPLLB: PLLB_RST === 1,
@@ -854,13 +933,20 @@ export class Converter {
 	}
 
 	/**
-	 * @param {PLLReset} param
+	 * @param {Partial<PLLReset>} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodePLLReset(param) {
+		const resetPLLA = param.resetPLLA ?? false
+		const resetPLLB = param.resetPLLB ?? false
+
+		const PLLA_RST = resetPLLA ? 1 : 0
+		const PLLB_RST = resetPLLB ? 1 : 0
+
 		const data = 0
-		// todo
-		throw new Error('todo')
+			| (PLLB_RST << 7)
+			| (PLLA_RST << 5)
+
 		return Uint8Array.from([ data ])
 	}
 
@@ -887,9 +973,10 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeCrystalInternalLoadCapacitance(param) {
-		const data = 0
-		// todo
-		throw new Error('todo')
+		const XTAL_CL = (param.capacitance) << 6
+
+		const data = 0 | XTAL_CL
+
 		return Uint8Array.from([ data ])
 	}
 

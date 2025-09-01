@@ -57,10 +57,12 @@ export class SI5351 {
 	}
 
 	/**
-	 * @param {InterruptStatusSticky} param
+	 * @param {Partial<InterruptStatusSticky>} param
 	 * @returns {Promise<void>}
 	*/
-	async setInterruptStatusSticky(param) { return Common.setInterruptStatusSticky(this.#abus, Converter.encodeInterruptStatusSticky(param)) }
+	async setInterruptStatusSticky(param) {
+		return Common.setInterruptStatusSticky(this.#abus, Converter.encodeInterruptStatusSticky(param))
+	}
 
 	/** @returns {Promise<InterruptStatusMask>} */
 	async getInterruptStatusMask() {
@@ -72,7 +74,9 @@ export class SI5351 {
 	 * @param {InterruptStatusMask} param
 	 * @returns {Promise<void>}
 	*/
-	async setInterruptStatusMask(param) { return Common.setInterruptStatusMask(this.#abus, Converter.encodeInterruptStatusMask(param)) }
+	async setInterruptStatusMask(param) {
+		return Common.setInterruptStatusMask(this.#abus, Converter.encodeInterruptStatusMask(param))
+	}
 
 	/** @returns {Promise<OutputEnableControl>} */
 	async getOutputEnableControl() {
@@ -84,7 +88,9 @@ export class SI5351 {
 	 * @param {OutputEnableControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setOutputEnableControl(param) { return Common.setOutputEnableControl(this.#abus, Converter.encodeOutputEnableControl(param)) }
+	async setOutputEnableControl(param) {
+		return Common.setOutputEnableControl(this.#abus, Converter.encodeOutputEnableControl(param))
+	}
 
 	/** @returns {Promise<PinEnabledControl>} */
 	async getPinEnabledControl() {
@@ -96,7 +102,9 @@ export class SI5351 {
 	 * @param {PinEnabledControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setPinEnabledControl(param) { return Common.setPinEnabledControl(this.#abus, Converter.encodePinEnabledControl(param)) }
+	async setPinEnabledControl(param) {
+		return Common.setPinEnabledControl(this.#abus, Converter.encodePinEnabledControl(param))
+	}
 
 	/** @returns {Promise<PLLInputSource>} */
 	async getPLLInputSource() {
@@ -108,7 +116,48 @@ export class SI5351 {
 	 * @param {PLLInputSource} param
 	 * @returns {Promise<void>}
 	*/
-	async setPLLInputSource(param) { return Common.setPLLInputSource(this.#abus, Converter.encodePLLInputSource(param)) }
+	async setPLLInputSource(param) {
+		return Common.setPLLInputSource(this.#abus, Converter.encodePLLInputSource(param))
+	}
+
+	/**
+	 * @param {number} clock
+	 * @returns {Promise<ClockControl>}
+	 */
+	async getClockControl(clock) {
+		switch(clock) {
+			case 0: return this.getClockControl0()
+			case 1: return this.getClockControl1()
+			case 2: return this.getClockControl2()
+			case 3: return this.getClockControl3()
+			case 4: return this.getClockControl4()
+			case 5: return this.getClockControl5()
+			case 6: return this.getClockControl6()
+			case 7: return this.getClockControl7()
+			default:
+				throw new RangeError('invalid index for clock control')
+		}
+	}
+
+	/**
+	 * @param {number} clock
+	 * @param {ClockControl} param
+	 * @returns {Promise<void>}
+	 */
+	async setClockControl(clock, param) {
+		switch(clock) {
+			case 0: return this.setClockControl0(param)
+			case 1: return this.setClockControl1(param)
+			case 2: return this.setClockControl2(param)
+			case 3: return this.setClockControl3(param)
+			case 4: return this.setClockControl4(param)
+			case 5: return this.setClockControl5(param)
+			case 6: return this.setClockControl6(param)
+			case 7: return this.setClockControl7(param)
+			default:
+				throw new RangeError('invalid index for clock control')
+		}
+	}
 
 	/** @returns {Promise<ClockControl>} */
 	async getClockControl0() {
@@ -120,7 +169,9 @@ export class SI5351 {
 	 * @param {ClockControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockControl0(param) { return Common.setClockControl0(this.#abus, Converter.encodeClockControl0(param)) }
+	async setClockControl0(param) {
+		return Common.setClockControl0(this.#abus, Converter.encodeClockControl0(param))
+	}
 
 	/** @returns {Promise<ClockControl>} */
 	async getClockControl1() {
@@ -132,7 +183,9 @@ export class SI5351 {
 	 * @param {ClockControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockControl1(param) { return Common.setClockControl1(this.#abus, Converter.encodeClockControl1(param)) }
+	async setClockControl1(param) {
+		return Common.setClockControl1(this.#abus, Converter.encodeClockControl1(param))
+	}
 
 	/** @returns {Promise<ClockControl>} */
 	async getClockControl2() {
@@ -144,7 +197,9 @@ export class SI5351 {
 	 * @param {ClockControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockControl2(param) { return Common.setClockControl2(this.#abus, Converter.encodeClockControl2(param)) }
+	async setClockControl2(param) {
+		return Common.setClockControl2(this.#abus, Converter.encodeClockControl2(param))
+	}
 
 	/** @returns {Promise<ClockControl>} */
 	async getClockControl3() {
@@ -156,7 +211,9 @@ export class SI5351 {
 	 * @param {ClockControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockControl3(param) { return Common.setClockControl3(this.#abus, Converter.encodeClockControl3(param)) }
+	async setClockControl3(param) {
+		return Common.setClockControl3(this.#abus, Converter.encodeClockControl3(param))
+	}
 
 	/** @returns {Promise<ClockControl>} */
 	async getClockControl4() {
@@ -168,7 +225,9 @@ export class SI5351 {
 	 * @param {ClockControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockControl4(param) { return Common.setClockControl4(this.#abus, Converter.encodeClockControl4(param)) }
+	async setClockControl4(param) {
+		return Common.setClockControl4(this.#abus, Converter.encodeClockControl4(param))
+	}
 
 	/** @returns {Promise<ClockControl>} */
 	async getClockControl5() {
@@ -180,7 +239,9 @@ export class SI5351 {
 	 * @param {ClockControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockControl5(param) { return Common.setClockControl5(this.#abus, Converter.encodeClockControl5(param)) }
+	async setClockControl5(param) {
+		return Common.setClockControl5(this.#abus, Converter.encodeClockControl5(param))
+	}
 
 	/** @returns {Promise<ClockControl>} */
 	async getClockControl6() {
@@ -192,7 +253,9 @@ export class SI5351 {
 	 * @param {ClockControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockControl6(param) { return Common.setClockControl6(this.#abus, Converter.encodeClockControl6(param)) }
+	async setClockControl6(param) {
+		return Common.setClockControl6(this.#abus, Converter.encodeClockControl6(param))
+	}
 
 	/** @returns {Promise<ClockControl>} */
 	async getClockControl7() {
@@ -204,7 +267,9 @@ export class SI5351 {
 	 * @param {ClockControl} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockControl7(param) { return Common.setClockControl7(this.#abus, Converter.encodeClockControl7(param)) }
+	async setClockControl7(param) {
+		return Common.setClockControl7(this.#abus, Converter.encodeClockControl7(param))
+	}
 
 	/** @returns {Promise<ClockDisabledState3_0>} */
 	async getClockDisableState3_0() {
@@ -216,7 +281,9 @@ export class SI5351 {
 	 * @param {ClockDisabledState3_0} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockDisableState3_0(param) { return Common.setClockDisableState3_0(this.#abus, Converter.encodeClockDisableState3_0(param)) }
+	async setClockDisableState3_0(param) {
+		return Common.setClockDisableState3_0(this.#abus, Converter.encodeClockDisableState3_0(param))
+	}
 
 	/** @returns {Promise<ClockDisabledState7_4>} */
 	async getClockDisableState7_4() {
@@ -228,7 +295,9 @@ export class SI5351 {
 	 * @param {ClockDisabledState7_4} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockDisableState7_4(param) { return Common.setClockDisableState7_4(this.#abus, Converter.encodeClockDisableState7_4(param)) }
+	async setClockDisableState7_4(param) {
+		return Common.setClockDisableState7_4(this.#abus, Converter.encodeClockDisableState7_4(param))
+	}
 
 	/** @returns {Promise<MultiSynthParameters0>} */
 	async getMultiSynthParameters0() {
@@ -240,7 +309,9 @@ export class SI5351 {
 	 * @param {MultiSynthParameters0} param
 	 * @returns {Promise<void>}
 	*/
-	async setMultiSynthParameters0(param) { return Common.setMultiSynthParameters0(this.#abus, Converter.encodeMultiSynthParameters0(param)) }
+	async setMultiSynthParameters0(param) {
+		return Common.setMultiSynthParameters0(this.#abus, Converter.encodeMultiSynthParameters0(param))
+	}
 
 	/** @returns {Promise<MultiSynthParameters1>} */
 	async getMultiSynthParameters1() {
@@ -252,7 +323,9 @@ export class SI5351 {
 	 * @param {MultiSynthParameters1} param
 	 * @returns {Promise<void>}
 	*/
-	async setMultiSynthParameters1(param) { return Common.setMultiSynthParameters1(this.#abus, Converter.encodeMultiSynthParameters1(param)) }
+	async setMultiSynthParameters1(param) {
+		return Common.setMultiSynthParameters1(this.#abus, Converter.encodeMultiSynthParameters1(param))
+	}
 
 	/** @returns {Promise<MultiSynthParameters2>} */
 	async getMultiSynthParameters2() {
@@ -264,7 +337,9 @@ export class SI5351 {
 	 * @param {MultiSynthParameters2} param
 	 * @returns {Promise<void>}
 	*/
-	async setMultiSynthParameters2(param) { return Common.setMultiSynthParameters2(this.#abus, Converter.encodeMultiSynthParameters2(param)) }
+	async setMultiSynthParameters2(param) {
+		return Common.setMultiSynthParameters2(this.#abus, Converter.encodeMultiSynthParameters2(param))
+	}
 
 	/** @returns {Promise<MultiSynthParameters3>} */
 	async getMultiSynthParameters3() {
@@ -276,7 +351,9 @@ export class SI5351 {
 	 * @param {MultiSynthParameters3} param
 	 * @returns {Promise<void>}
 	*/
-	async setMultiSynthParameters3(param) { return Common.setMultiSynthParameters3(this.#abus, Converter.encodeMultiSynthParameters3(param)) }
+	async setMultiSynthParameters3(param) {
+		return Common.setMultiSynthParameters3(this.#abus, Converter.encodeMultiSynthParameters3(param))
+	}
 
 	/** @returns {Promise<MultiSynthParameters4>} */
 	async getMultiSynthParameters4() {
@@ -288,7 +365,9 @@ export class SI5351 {
 	 * @param {MultiSynthParameters4} param
 	 * @returns {Promise<void>}
 	*/
-	async setMultiSynthParameters4(param) { return Common.setMultiSynthParameters4(this.#abus, Converter.encodeMultiSynthParameters4(param)) }
+	async setMultiSynthParameters4(param) {
+		return Common.setMultiSynthParameters4(this.#abus, Converter.encodeMultiSynthParameters4(param))
+	}
 
 	/** @returns {Promise<MultiSynthParameters5>} */
 	async getMultiSynthParameters5() {
@@ -300,7 +379,9 @@ export class SI5351 {
 	 * @param {MultiSynthParameters5} param
 	 * @returns {Promise<void>}
 	*/
-	async setMultiSynthParameters5(param) { return Common.setMultiSynthParameters5(this.#abus, Converter.encodeMultiSynthParameters5(param)) }
+	async setMultiSynthParameters5(param) {
+		return Common.setMultiSynthParameters5(this.#abus, Converter.encodeMultiSynthParameters5(param))
+	}
 
 	/** @returns {Promise<MultiSynthParameters6>} */
 	async getMultiSynthParameters6() {
@@ -312,7 +393,9 @@ export class SI5351 {
 	 * @param {MultiSynthParameters6} param
 	 * @returns {Promise<void>}
 	*/
-	async setMultiSynthParameters6(param) { return Common.setMultiSynthParameters6(this.#abus, Converter.encodeMultiSynthParameters6(param)) }
+	async setMultiSynthParameters6(param) {
+		return Common.setMultiSynthParameters6(this.#abus, Converter.encodeMultiSynthParameters6(param))
+	}
 
 	/** @returns {Promise<MultiSynthParameters7>} */
 	async getMultiSynthParameters7() {
@@ -324,7 +407,9 @@ export class SI5351 {
 	 * @param {MultiSynthParameters7} param
 	 * @returns {Promise<void>}
 	*/
-	async setMultiSynthParameters7(param) { return Common.setMultiSynthParameters7(this.#abus, Converter.encodeMultiSynthParameters7(param)) }
+	async setMultiSynthParameters7(param) {
+		return Common.setMultiSynthParameters7(this.#abus, Converter.encodeMultiSynthParameters7(param))
+	}
 
 	/** @returns {Promise<ClockOutputDivider>} */
 	async getClockOutputDivider6_7() {
@@ -336,7 +421,40 @@ export class SI5351 {
 	 * @param {ClockOutputDivider} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockOutputDivider6_7(param) { return Common.setClockOutputDivider6_7(this.#abus, Converter.encodeClockOutputDivider6_7(param)) }
+	async setClockOutputDivider6_7(param) {
+		return Common.setClockOutputDivider6_7(this.#abus, Converter.encodeClockOutputDivider6_7(param))
+	}
+
+	/**
+	 * @param {number} clock
+	 * @returns {Promise<ClockInitialPhaseOffset>}
+	 */
+	async getClockInitialPhaseOffset(clock) {
+		switch(clock) {
+			case 0: return this.getClockInitialPhaseOffset0()
+			case 1: return this.getClockInitialPhaseOffset1()
+			case 2: return this.getClockInitialPhaseOffset2()
+			case 3: return this.getClockInitialPhaseOffset3()
+			case 4: return this.getClockInitialPhaseOffset4()
+			case 5: return this.getClockInitialPhaseOffset5()
+			default:
+				throw new RangeError('invalid index for phase offset')
+		}
+	}
+
+	async setClockInitialPhaseOffset(clock, param) {
+		switch(clock) {
+			case 0: return this.setClockInitialPhaseOffset0(param)
+			case 1: return this.setClockInitialPhaseOffset1(param)
+			case 2: return this.setClockInitialPhaseOffset2(param)
+			case 3: return this.setClockInitialPhaseOffset3(param)
+			case 4: return this.setClockInitialPhaseOffset4(param)
+			case 5: return this.setClockInitialPhaseOffset5(param)
+			default:
+				throw new RangeError('invalid index for phase offset')
+		}
+	}
+
 
 	/** @returns {Promise<ClockInitialPhaseOffset>} */
 	async getClockInitialPhaseOffset0() {
@@ -348,7 +466,9 @@ export class SI5351 {
 	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockInitialPhaseOffset0(param) { return Common.setClockInitialPhaseOffset0(this.#abus, Converter.encodeClockInitialPhaseOffset0(param)) }
+	async setClockInitialPhaseOffset0(param) {
+		return Common.setClockInitialPhaseOffset0(this.#abus, Converter.encodeClockInitialPhaseOffset0(param))
+	}
 
 	/** @returns {Promise<ClockInitialPhaseOffset>} */
 	async getClockInitialPhaseOffset1() {
@@ -360,7 +480,9 @@ export class SI5351 {
 	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockInitialPhaseOffset1(param) { return Common.setClockInitialPhaseOffset1(this.#abus, Converter.encodeClockInitialPhaseOffset1(param)) }
+	async setClockInitialPhaseOffset1(param) {
+		return Common.setClockInitialPhaseOffset1(this.#abus, Converter.encodeClockInitialPhaseOffset1(param))
+	}
 
 	/** @returns {Promise<ClockInitialPhaseOffset>} */
 	async getClockInitialPhaseOffset2() {
@@ -372,7 +494,9 @@ export class SI5351 {
 	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockInitialPhaseOffset2(param) { return Common.setClockInitialPhaseOffset2(this.#abus, Converter.encodeClockInitialPhaseOffset2(param)) }
+	async setClockInitialPhaseOffset2(param) {
+		return Common.setClockInitialPhaseOffset2(this.#abus, Converter.encodeClockInitialPhaseOffset2(param))
+	}
 
 	/** @returns {Promise<ClockInitialPhaseOffset>} */
 	async getClockInitialPhaseOffset3() {
@@ -384,7 +508,9 @@ export class SI5351 {
 	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockInitialPhaseOffset3(param) { return Common.setClockInitialPhaseOffset3(this.#abus, Converter.encodeClockInitialPhaseOffset3(param)) }
+	async setClockInitialPhaseOffset3(param) {
+		return Common.setClockInitialPhaseOffset3(this.#abus, Converter.encodeClockInitialPhaseOffset3(param))
+	}
 
 	/** @returns {Promise<ClockInitialPhaseOffset>} */
 	async getClockInitialPhaseOffset4() {
@@ -396,7 +522,9 @@ export class SI5351 {
 	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockInitialPhaseOffset4(param) { return Common.setClockInitialPhaseOffset4(this.#abus, Converter.encodeClockInitialPhaseOffset4(param)) }
+	async setClockInitialPhaseOffset4(param) {
+		return Common.setClockInitialPhaseOffset4(this.#abus, Converter.encodeClockInitialPhaseOffset4(param))
+	}
 
 	/** @returns {Promise<ClockInitialPhaseOffset>} */
 	async getClockInitialPhaseOffset5() {
@@ -408,7 +536,9 @@ export class SI5351 {
 	 * @param {ClockInitialPhaseOffset} param
 	 * @returns {Promise<void>}
 	*/
-	async setClockInitialPhaseOffset5(param) { return Common.setClockInitialPhaseOffset5(this.#abus, Converter.encodeClockInitialPhaseOffset5(param)) }
+	async setClockInitialPhaseOffset5(param) {
+		return Common.setClockInitialPhaseOffset5(this.#abus, Converter.encodeClockInitialPhaseOffset5(param))
+	}
 
 	/** @returns {Promise<PLLReset>} */
 	async getPLLReset() {
@@ -417,10 +547,12 @@ export class SI5351 {
 	}
 
 	/**
-	 * @param {PLLReset} param
+	 * @param {Partial<PLLReset>} param
 	 * @returns {Promise<void>}
 	*/
-	async setPLLReset(param) { return Common.setPLLReset(this.#abus, Converter.encodePLLReset(param)) }
+	async setPLLReset(param) {
+		return Common.setPLLReset(this.#abus, Converter.encodePLLReset(param))
+	}
 
 	/** @returns {Promise<CrystalInternalLoadCapacitance>} */
 	async getCrystalInternalLoadCapacitance() {
@@ -432,5 +564,7 @@ export class SI5351 {
 	 * @param {CrystalInternalLoadCapacitance} param
 	 * @returns {Promise<void>}
 	*/
-	async setCrystalInternalLoadCapacitance(param) { return Common.setCrystalInternalLoadCapacitance(this.#abus, Converter.encodeCrystalInternalLoadCapacitance(param)) }
+	async setCrystalInternalLoadCapacitance(param) {
+		return Common.setCrystalInternalLoadCapacitance(this.#abus, Converter.encodeCrystalInternalLoadCapacitance(param))
+	}
 }
