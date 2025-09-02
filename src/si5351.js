@@ -14,8 +14,8 @@ import { Converter } from './converter.js'
  * ClockDisabledState7_4,
  * ClockDisabledState3_0,
  * MultiSynthParameters,
- * MultiSynthParameters6,
- * MultiSynthParameters7,
+ * MultiSynthParametersBase,
+ * MultiSynthParametersPartial,
  * ClockOutputDivider,
  * ClockInitialPhaseOffset,
  * PLLReset,
@@ -294,6 +294,46 @@ export class SI5351 {
 		return Common.setClockDisableState7_4(this.#abus, Converter.encodeClockDisableState7_4(param))
 	}
 
+	/**
+	 * @param {number} clock
+	 * @returns {Promise<MultiSynthParametersPartial>}
+	 */
+	async getMultiSynthParameters(clock) {
+		switch(clock) {
+			case 0: return this.getMultiSynthParameters0()
+			case 1: return this.getMultiSynthParameters1()
+			case 2: return this.getMultiSynthParameters2()
+			case 3: return this.getMultiSynthParameters3()
+			case 4: return this.getMultiSynthParameters4()
+			case 5: return this.getMultiSynthParameters5()
+			case 6: return this.getMultiSynthParameters6()
+			case 7: return this.getMultiSynthParameters7()
+			default:
+				throw new RangeError('invalid index for multi synth parameters')
+		}
+	}
+
+	/**
+	 * @param {number} clock
+	 * @param {MultiSynthParameters|MultiSynthParametersPartial} param
+	 * @returns {Promise<void>}
+	 */
+	async setMultiSynthParameters(clock, param) {
+		switch(clock) {
+			case 0: return this.setMultiSynthParameters0(param)
+			case 1: return this.setMultiSynthParameters1(param)
+			case 2: return this.setMultiSynthParameters2(param)
+			case 3: return this.setMultiSynthParameters3(param)
+			case 4: return this.setMultiSynthParameters4(param)
+			case 5: return this.setMultiSynthParameters5(param)
+			case 6: return this.setMultiSynthParameters6(param)
+			case 7: return this.setMultiSynthParameters7(param)
+			default:
+				throw new RangeError('invalid index for multi synth parameters')
+		}
+	}
+
+
 	/** @returns {Promise<MultiSynthParameters>} */
 	async getMultiSynthParameters0() {
 		const ab = await Common.getMultiSynthParameters0(this.#abus)
@@ -378,28 +418,28 @@ export class SI5351 {
 		return Common.setMultiSynthParameters5(this.#abus, Converter.encodeMultiSynthParameters5(param))
 	}
 
-	/** @returns {Promise<MultiSynthParameters6>} */
+	/** @returns {Promise<MultiSynthParametersBase>} */
 	async getMultiSynthParameters6() {
 		const ab = await Common.getMultiSynthParameters6(this.#abus)
 		return Converter.decodeMultiSynthParameters6(ab)
 	}
 
 	/**
-	 * @param {MultiSynthParameters6} param
+	 * @param {MultiSynthParametersBase} param
 	 * @returns {Promise<void>}
 	*/
 	async setMultiSynthParameters6(param) {
 		return Common.setMultiSynthParameters6(this.#abus, Converter.encodeMultiSynthParameters6(param))
 	}
 
-	/** @returns {Promise<MultiSynthParameters7>} */
+	/** @returns {Promise<MultiSynthParametersBase>} */
 	async getMultiSynthParameters7() {
 		const ab = await Common.getMultiSynthParameters7(this.#abus)
 		return Converter.decodeMultiSynthParameters7(ab)
 	}
 
 	/**
-	 * @param {MultiSynthParameters7} param
+	 * @param {MultiSynthParametersBase} param
 	 * @returns {Promise<void>}
 	*/
 	async setMultiSynthParameters7(param) {

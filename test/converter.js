@@ -220,8 +220,8 @@ describe('Converter', () => {
 			const u8 = Uint8Array.from([ 0b0000_0000 ])
 			const result = Converter.decodePLLInputSource(u8)
 			assert.deepEqual(result, {
-				sourcePLLB: PLL_SOURCE.XTAL,
-				sourcePLLA: PLL_SOURCE.XTAL
+				sourcePLLB: PLL_SOURCE.CRYSTAL,
+				sourcePLLA: PLL_SOURCE.CRYSTAL
 			})
 		})
 
@@ -229,8 +229,8 @@ describe('Converter', () => {
 			const u8 = Uint8Array.from([ 0b1111_1000 ])
 			const result = Converter.decodePLLInputSource(u8)
 			assert.deepEqual(result, {
-				sourcePLLB: PLL_SOURCE.CLKIN,
-				sourcePLLA: PLL_SOURCE.XTAL
+				sourcePLLB: PLL_SOURCE.CLOCK_IN,
+				sourcePLLA: PLL_SOURCE.CRYSTAL
 			})
 		})
 
@@ -238,8 +238,8 @@ describe('Converter', () => {
 			const u8 = Uint8Array.from([ 0b1111_1000 ])
 			const result = Converter.decodePLLInputSource(u8.buffer)
 			assert.deepEqual(result, {
-				sourcePLLB: PLL_SOURCE.CLKIN,
-				sourcePLLA: PLL_SOURCE.XTAL
+				sourcePLLB: PLL_SOURCE.CLOCK_IN,
+				sourcePLLA: PLL_SOURCE.CRYSTAL
 			})
 		})
 	})
@@ -253,7 +253,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -266,7 +266,7 @@ describe('Converter', () => {
 				integerMode: true,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -279,7 +279,7 @@ describe('Converter', () => {
 				integerMode: true,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -294,7 +294,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -307,7 +307,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLB_OR_VCXO,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -322,7 +322,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -350,7 +350,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -363,7 +363,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: true,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_8_MA
 			})
 		})
@@ -378,7 +378,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -406,7 +406,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -421,7 +421,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -436,7 +436,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 		})
@@ -1177,8 +1177,8 @@ describe('Converter', () => {
 	describe('encodePLLInputSource', () => {
 		it('should encode', () => {
 			const ab = Converter.encodePLLInputSource({
-				sourcePLLA: PLL_SOURCE.XTAL,
-				sourcePLLB: PLL_SOURCE.XTAL
+				sourcePLLA: PLL_SOURCE.CRYSTAL,
+				sourcePLLB: PLL_SOURCE.CRYSTAL
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
 				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
@@ -1186,6 +1186,59 @@ describe('Converter', () => {
 			const [ data ] = u8
 
 			assert.equal(data, 0b0000_0000)
+		})
+
+		it('should encode with unique A value', () => {
+			const ab = Converter.encodePLLInputSource({
+				sourcePLLA: PLL_SOURCE.CLOCK_IN,
+				sourcePLLB: PLL_SOURCE.CRYSTAL
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0000_0100)
+		})
+
+		it('should encode with unique B value', () => {
+			const ab = Converter.encodePLLInputSource({
+				sourcePLLA: PLL_SOURCE.CRYSTAL,
+				sourcePLLB: PLL_SOURCE.CLOCK_IN
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0000_1000)
+		})
+
+		it('should encode with unique A and B value', () => {
+			const ab = Converter.encodePLLInputSource({
+				sourcePLLA: PLL_SOURCE.CLOCK_IN,
+				sourcePLLB: PLL_SOURCE.CLOCK_IN
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0000_1100)
+		})
+
+		it('should throw with invalid A source values', () => {
+			assert.throws(() => Converter.encodePLLInputSource({
+				sourcePLLA: 0b11,
+				sourcePLLB: 0
+			}))
+		})
+
+		it('should throw with invalid B source values', () => {
+			assert.throws(() => Converter.encodePLLInputSource({
+				sourcePLLA: 0,
+				sourcePLLB: 0b11
+			}))
 		})
 	})
 
@@ -1196,7 +1249,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
@@ -1232,7 +1285,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
@@ -1251,7 +1304,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
@@ -1270,7 +1323,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
@@ -1289,7 +1342,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
@@ -1308,7 +1361,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
@@ -1327,7 +1380,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
@@ -1346,7 +1399,7 @@ describe('Converter', () => {
 				integerMode: false,
 				multiSynthSourceSelect: MULTI_SYNTH_SOURCE_SELECT.PLLA,
 				inverted: false,
-				inputSourceSelect: INPUT_SOURCE_SELECT.XTAL,
+				inputSourceSelect: INPUT_SOURCE_SELECT.CRYSTAL,
 				strength: STRENGTH.DRIVE_2_MA
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
@@ -1590,7 +1643,7 @@ describe('Converter', () => {
 	describe('encodeMultiSynthParameters6', () => {
 		it('should encode', () => {
 			const ab = Converter.encodeMultiSynthParameters6({
-
+				p1: 0
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
 				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
@@ -1604,7 +1657,7 @@ describe('Converter', () => {
 	describe('encodeMultiSynthParameters7', () => {
 		it('should encode', () => {
 			const ab = Converter.encodeMultiSynthParameters7({
-
+				p1: 0
 			})
 			const u8 = ArrayBuffer.isView(ab) ?
 				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :

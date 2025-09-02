@@ -52,8 +52,8 @@
 
 /** @enum {PLLSource} */
 export const PLL_SOURCE = {
-	XTAL: 0,
-	CLKIN: 1
+	CRYSTAL: 0,
+	CLOCK_IN: 1
 }
 
 /**
@@ -74,8 +74,8 @@ export const MULTI_SYNTH_SOURCE_SELECT = {
 
 /** @enum {InputSourceSelect} */
 export const INPUT_SOURCE_SELECT = {
-	XTAL: 0b00,
-	CLKIN: 0b01,
+	CRYSTAL: 0b00,
+	CLOCK_IN: 0b01,
 	// reserved: 0b10
 	MULTI_SYNTH: 0b11
 }
@@ -130,19 +130,23 @@ export const DISABLED_STATE = {
 /** @typedef {ClockDisabledState7_4 & ClockDisabledState3_0} ClockDisabledState */
 
 /**
- * @typedef {Object} MultiSynthParameters
+ * @typedef {Object} MultiSynthParametersBase
  * @property {number} p1
+ */
+
+/**
+ * @typedef {Object} MultiSynthParametersExtended
  * @property {number} p2
  * @property {number} p3
- * @property {number} div
+ * @property {OutputDivider} div
  */
 
 /**
- * @typedef {Object} MultiSynthParameters6
+ * @typedef {MultiSynthParametersBase & MultiSynthParametersExtended} MultiSynthParameters
  */
 
 /**
- * @typedef {Object} MultiSynthParameters7
+ * @typedef {MultiSynthParametersBase & Partial<MultiSynthParametersExtended>} MultiSynthParametersPartial
  */
 
 /** @typedef {number} OutputDivider */

@@ -23,8 +23,7 @@ import {
  * ClockDisabledState7_4,
  * ClockDisabledState3_0,
  * MultiSynthParameters,
- * MultiSynthParameters6,
- * MultiSynthParameters7,
+ * MultiSynthParametersBase,
  * ClockOutputDivider,
  * ClockInitialPhaseOffset,
  * PLLReset,
@@ -291,7 +290,10 @@ export class Converter {
 		const PLLB_SRC = (param.sourcePLLB)
 		const PLLA_SRC = (param.sourcePLLA)
 
-		const data = 0 | PLLB_SRC | PLLA_SRC
+		if((PLLB_SRC & SINGLE_BIT_MASK) !== PLLB_SRC) { throw new Error('invalid PLL Source') }
+		if((PLLA_SRC & SINGLE_BIT_MASK) !== PLLA_SRC) { throw new Error('invalid PLL Source') }
+
+		const data = 0 | (PLLB_SRC << 3) | (PLLA_SRC << 2)
 
 		return Uint8Array.from([ data ])
 	}
@@ -734,7 +736,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {MultiSynthParameters6}
+	 * @returns {MultiSynthParametersBase}
 	*/
 	static decodeMultiSynthParameters6(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -748,7 +750,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {MultiSynthParameters6} param
+	 * @param {MultiSynthParametersBase} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters6(param) {
@@ -757,7 +759,7 @@ export class Converter {
 
 	/**
 	 * @param {I2CBufferSource} buffer
-	 * @returns {MultiSynthParameters7}
+	 * @returns {MultiSynthParametersBase}
 	*/
 	static decodeMultiSynthParameters7(buffer) {
 		const u8 = ArrayBuffer.isView(buffer) ?
@@ -771,7 +773,7 @@ export class Converter {
 	}
 
 	/**
-	 * @param {MultiSynthParameters7} param
+	 * @param {MultiSynthParametersBase} param
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeMultiSynthParameters7(param) {

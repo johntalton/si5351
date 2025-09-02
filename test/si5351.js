@@ -5,7 +5,8 @@ import { I2CAddressedBus } from '@johntalton/and-other-delights'
 
 import {
 	SI5351,
-	REGISTER
+	REGISTER,
+	PLL_SOURCE
 } from '@johntalton/si5351'
 
 /** @import { I2CBus } from '@johntalton/and-other-delights' */
@@ -403,7 +404,8 @@ describe('SI5351', () => {
 	describe('setPLLInputSource', () => {
 		it('should set', async () => {
 			await context.device.setPLLInputSource({
-
+				sourcePLLA: PLL_SOURCE.CLOCK_IN,
+				sourcePLLB: PLL_SOURCE.CLOCK_IN
 			})
 
 			assert.equal(context.bus.writeList.length, 1)
