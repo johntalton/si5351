@@ -1083,6 +1083,21 @@ describe('Converter', () => {
 
 			assert.equal(data, 0b0000_0000)
 		})
+
+		it('should encode with unique value', () => {
+			const ab = Converter.encodeInterruptStatusSticky({
+				systemCalibrationStatus: false,
+				lossOfLockPLLB: true,
+				lossOfLockPLLA: false,
+				lossOfSignal: true
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0101_0000)
+		})
 	})
 
 	describe('encodeInterruptStatusMask', () => {
@@ -1151,6 +1166,25 @@ describe('Converter', () => {
 
 			assert.equal(data, 0b1111_1111)
 		})
+
+		it('should encode with unique value', () => {
+			const ab = Converter.encodeOutputEnableControl({
+				clock7: false,
+				clock6: false,
+				clock5: false,
+				clock4: true,
+				clock3: true,
+				clock2: true,
+				clock1: true,
+				clock0: false
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b1110_0001)
+		})
 	})
 
 	describe('encodePinEnabledControl', () => {
@@ -1171,6 +1205,25 @@ describe('Converter', () => {
 			const [ data ] = u8
 
 			assert.equal(data, 0b1111_1111)
+		})
+
+		it('should encode with unique value', () => {
+			const ab = Converter.encodePinEnabledControl({
+				clock7: true,
+				clock6: false,
+				clock5: false,
+				clock4: false,
+				clock3: true,
+				clock2: true,
+				clock1: false,
+				clock0: false
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0111_0011)
 		})
 	})
 
@@ -1426,6 +1479,21 @@ describe('Converter', () => {
 
 			assert.equal(data, 0b0000_0000)
 		})
+
+		it('should encode with unique values', () => {
+			const ab = Converter.encodeClockDisableState3_0({
+				clock3: DISABLED_STATE.HIGH,
+				clock2: DISABLED_STATE.HIGH_IMPEDANCE,
+				clock1: DISABLED_STATE.LOW,
+				clock0: DISABLED_STATE.NEVER
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0110_0011)
+		})
 	})
 
 	describe('encodeClockDisableState7_4', () => {
@@ -1442,6 +1510,21 @@ describe('Converter', () => {
 			const [ data ] = u8
 
 			assert.equal(data, 0b0000_0000)
+		})
+
+		it('should encode with unique value', () => {
+			const ab = Converter.encodeClockDisableState7_4({
+				clock7: DISABLED_STATE.LOW,
+				clock6: DISABLED_STATE.NEVER,
+				clock5: DISABLED_STATE.HIGH,
+				clock4: DISABLED_STATE.HIGH_IMPEDANCE
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0011_0110)
 		})
 	})
 
@@ -1652,6 +1735,18 @@ describe('Converter', () => {
 
 			assert.equal(data, 0)
 		})
+
+		it('should encode with unique value', () => {
+			const ab = Converter.encodeMultiSynthParameters6({
+				p1: 77
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 77)
+		})
 	})
 
 	describe('encodeMultiSynthParameters7', () => {
@@ -1665,6 +1760,18 @@ describe('Converter', () => {
 			const [ data ] = u8
 
 			assert.equal(data, 0)
+		})
+
+		it('should encode with unique value', () => {
+			const ab = Converter.encodeMultiSynthParameters7({
+				p1: 255
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 255)
 		})
 	})
 
@@ -1680,6 +1787,19 @@ describe('Converter', () => {
 			const [ data ] = u8
 
 			assert.equal(data, 0b0000_0000)
+		})
+
+		it('should encode with unique value', () => {
+			const ab = Converter.encodeClockOutputDivider6_7({
+				dividerR7: OUTPUT_DIVIDER.DIVIDE_BY_16,
+				dividerR6: OUTPUT_DIVIDER.DIVIDE_BY_128
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0100_0111)
 		})
 	})
 
@@ -1834,6 +1954,18 @@ describe('Converter', () => {
 			const [ data ] = u8
 
 			assert.equal(data, 0b0000_0000)
+		})
+
+		it('should encode with unique value', () => {
+			const ab = Converter.encodeCrystalInternalLoadCapacitance({
+				capacitance: CRYSTAL_CAPACITANCE.INTERNAL_6_PF
+			})
+			const u8 = ArrayBuffer.isView(ab) ?
+				new Uint8Array(ab.buffer, ab.byteOffset, ab.byteLength) :
+				new Uint8Array(ab)
+			const [ data ] = u8
+
+			assert.equal(data, 0b0100_0000)
 		})
 	})
 

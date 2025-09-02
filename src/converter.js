@@ -506,10 +506,10 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockDisableState3_0(param) {
-		const CLK3_DIS_STATE = (param.clock3) >> 6
-		const CLK2_DIS_STATE = (param.clock2) >> 4
-		const CLK1_DIS_STATE = (param.clock1) >> 2
-		const CLK0_DIS_STATE = (param.clock0) >> 0
+		const CLK3_DIS_STATE = (param.clock3) << 6
+		const CLK2_DIS_STATE = (param.clock2) << 4
+		const CLK1_DIS_STATE = (param.clock1) << 2
+		const CLK0_DIS_STATE = (param.clock0) << 0
 
 		const data = 0
 			| CLK3_DIS_STATE
@@ -549,10 +549,10 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockDisableState7_4(param) {
-		const CLK7_DIS_STATE = (param.clock7) >> 6
-		const CLK6_DIS_STATE = (param.clock6) >> 4
-		const CLK5_DIS_STATE = (param.clock5) >> 2
-		const CLK4_DIS_STATE = (param.clock4) >> 0
+		const CLK7_DIS_STATE = (param.clock7) << 6
+		const CLK6_DIS_STATE = (param.clock6) << 4
+		const CLK5_DIS_STATE = (param.clock5) << 2
+		const CLK4_DIS_STATE = (param.clock4) << 0
 
 		const data = 0
 			| CLK7_DIS_STATE
@@ -805,8 +805,8 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeClockOutputDivider6_7(param) {
-		const R7_DIV = (param.dividerR7) >> 4
-		const R6_DIV = (param.dividerR6) >> 0
+		const R7_DIV = (param.dividerR7) << 4
+		const R6_DIV = (param.dividerR6) << 0
 
 		const data = 0 | R7_DIV | R6_DIV
 
