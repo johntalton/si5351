@@ -47,14 +47,14 @@ export class Converter {
 		const LOL_B = (data >> 6) & SINGLE_BIT_MASK
 		const LOL_A = (data >> 5) & SINGLE_BIT_MASK
 		const LOS = (data >> 4) & SINGLE_BIT_MASK
-		const REVID = data & TWO_BIT_MASK
+		const REV_ID = data & TWO_BIT_MASK
 
 		return {
 			systemInitializing: SYS_INIT === 1,
 			lossOfLockPLLB: LOL_B === 1,
 			lossOfLockPLLA: LOL_A === 1,
 			lossOfSignal: LOS === 1,
-			revisionId: REVID
+			revisionId: REV_ID
 		}
 	}
 
@@ -69,16 +69,16 @@ export class Converter {
 
 		const [ data ] = u8
 
-		const SYS_INIT_STKY = (data >> 7) & SINGLE_BIT_MASK
-		const LOL_B_STKY = (data >> 6) & SINGLE_BIT_MASK
-		const LOL_A_STKY = (data >> 5) & SINGLE_BIT_MASK
-		const LOS_STKY = (data >> 4) & SINGLE_BIT_MASK
+		const SYS_INIT_STICKY = (data >> 7) & SINGLE_BIT_MASK
+		const LOL_B_STICKY = (data >> 6) & SINGLE_BIT_MASK
+		const LOL_A_STICKY = (data >> 5) & SINGLE_BIT_MASK
+		const LOS_STICKY = (data >> 4) & SINGLE_BIT_MASK
 
 		return {
-			systemCalibrationStatus: SYS_INIT_STKY === 1 ,
-			lossOfLockPLLB: LOL_B_STKY === 1,
-			lossOfLockPLLA: LOL_A_STKY === 1,
-			lossOfSignal: LOS_STKY === 1
+			systemCalibrationStatus: SYS_INIT_STICKY === 1 ,
+			lossOfLockPLLB: LOL_B_STICKY === 1,
+			lossOfLockPLLA: LOL_A_STICKY === 1,
+			lossOfSignal: LOS_STICKY === 1
 		}
 	}
 
@@ -92,16 +92,16 @@ export class Converter {
 		const lossOfLockPLLA = param.lossOfLockPLLA ?? true
 		const lossOfSignal = param.lossOfSignal ?? true
 
-		const SYS_INIT_STKY = (systemCalibrationStatus ? 1 : 0) << 7
-		const LOL_B_STKY = (lossOfLockPLLB ? 1 : 0) << 6
-		const LOL_A_STKY = (lossOfLockPLLA ? 1 : 0) << 5
-		const LOS_STKY = (lossOfSignal ? 1 : 0) << 4
+		const SYS_INIT_STICKY = (systemCalibrationStatus ? 1 : 0) << 7
+		const LOL_B_STICKY = (lossOfLockPLLB ? 1 : 0) << 6
+		const LOL_A_STICKY = (lossOfLockPLLA ? 1 : 0) << 5
+		const LOS_STICKY = (lossOfSignal ? 1 : 0) << 4
 
 		const data = 0
-			| SYS_INIT_STKY
-			| LOL_B_STKY
-			| LOL_A_STKY
-			| LOS_STKY
+			| SYS_INIT_STICKY
+			| LOL_B_STICKY
+			| LOL_A_STICKY
+			| LOS_STICKY
 
 		return Uint8Array.from([ data ])
 	}
@@ -309,20 +309,20 @@ export class Converter {
 
 		const [ data ] = u8
 
-		const CLKX_PDN = (data >> 7) & SINGLE_BIT_MASK
-		const MSX_INT = (data >> 6) & SINGLE_BIT_MASK
-		const MSX_SRC = (data >> 5) & SINGLE_BIT_MASK
-		const CLKX_INV = (data >> 4) & SINGLE_BIT_MASK
-		const CLKX_SRC = (data >> 2) & TWO_BIT_MASK
-		const CLKX_IDRV = (data >> 0) & TWO_BIT_MASK
+		const CLK_PDN = (data >> 7) & SINGLE_BIT_MASK
+		const MS_INT = (data >> 6) & SINGLE_BIT_MASK
+		const MS_SRC = (data >> 5) & SINGLE_BIT_MASK
+		const CLK_INV = (data >> 4) & SINGLE_BIT_MASK
+		const CLK_SRC = (data >> 2) & TWO_BIT_MASK
+		const CLK_I_DRIVE = (data >> 0) & TWO_BIT_MASK
 
 		return {
-			poweredDown: CLKX_PDN === 1,
-			integerMode: MSX_INT === 1,
-			multiSynthSourceSelect: MSX_SRC, // for 6 and 7 this is FBA and FBB
-			inverted: CLKX_INV === 1,
-			inputSourceSelect: CLKX_SRC,
-			strength: CLKX_IDRV
+			poweredDown: CLK_PDN === 1,
+			integerMode: MS_INT === 1,
+			multiSynthSourceSelect: MS_SRC, // for 6 and 7 this is FBA and FBB
+			inverted: CLK_INV === 1,
+			inputSourceSelect: CLK_SRC,
+			strength: CLK_I_DRIVE
 		}
 	}
 
@@ -331,20 +331,20 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static #encodeClockControl(param) {
-		const CLKX_PDN = (param.poweredDown ? 1 : 0) << 7
-		const MSX_INT = (param.integerMode ? 1 : 0) << 6
-		const MSX_SRC = (param.multiSynthSourceSelect) << 5
-		const CLKX_INV = (param.inverted ? 1 : 0) << 4
-		const CLKX_SRC = (param.inputSourceSelect) << 2
-		const CLKX_IDRV = (param.strength) << 0
+		const CLK_PDN = (param.poweredDown ? 1 : 0) << 7
+		const MS_INT = (param.integerMode ? 1 : 0) << 6
+		const MS_SRC = (param.multiSynthSourceSelect) << 5
+		const CLK_INV = (param.inverted ? 1 : 0) << 4
+		const CLK_SRC = (param.inputSourceSelect) << 2
+		const CLK_I_DRIVE = (param.strength) << 0
 
 		const data = 0
-			| CLKX_PDN
-			| MSX_INT
-			| MSX_SRC
-			| CLKX_INV
-			| CLKX_SRC
-			| CLKX_IDRV
+			| CLK_PDN
+			| MS_INT
+			| MS_SRC
+			| CLK_INV
+			| CLK_SRC
+			| CLK_I_DRIVE
 
 		return Uint8Array.from([ data ])
 	}
@@ -824,9 +824,9 @@ export class Converter {
 
 		const [ data ] = u8
 
-		const CLKX_PHOFF = data & SEVEN_BIT_MASK
+		const CLK_PHASE_OFF = data & SEVEN_BIT_MASK
 
-		return CLKX_PHOFF
+		return CLK_PHASE_OFF
 	}
 
 	/**
@@ -985,10 +985,10 @@ export class Converter {
 
 		const [ data ] = u8
 
-		const XTAL_CL = (data >> 6) & TWO_BIT_MASK
+		const CRYSTAL_CL = (data >> 6) & TWO_BIT_MASK
 
 		return {
-			capacitance: XTAL_CL
+			capacitance: CRYSTAL_CL
 		}
 	}
 
@@ -997,9 +997,9 @@ export class Converter {
 	 * @returns {I2CBufferSource}
 	 */
 	static encodeCrystalInternalLoadCapacitance(param) {
-		const XTAL_CL = (param.capacitance) << 6
+		const CRYSTAL_CL = (param.capacitance) << 6
 
-		const data = 0 | XTAL_CL
+		const data = 0 | CRYSTAL_CL
 
 		return Uint8Array.from([ data ])
 	}
